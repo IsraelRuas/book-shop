@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ISRAEL</title>
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="nav-branding">Node.js and Mongoose DB</a>
+                <ul class="nav-menu">
+                    <li class="nav-link"><a class="nav-links" href="/redirectRoutes/index-node">Home</a></li>
+                    <li class="nav-link"><a class="nav-links" href="product.html">Product</a></li>
+                    <li class="nav-link"><a class="nav-links" href="order.html">Order</a></li>
+                    <li class="nav-link"><a class="nav-links" href="/users/user-management">User</a></li>
+                    <li class="nav-link"><a class="nav-links" href="/users/signup">Signup</a></li>
+                    <li class="nav-link"><a class="nav-links" href="/users/login">Login</a></li>
+                    <li class="nav-link"><a class="nav-links" href="/redirectRoutes/about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="userForm">
+        <h1 class="textSignUp">Log in</h1>
+
+        <% if (messages.error){ %>
+            <div class="login-invalid-alert">
+                <% messages.error.forEach(function(error){ %>
+                    <%= error %>
+                        <% });%>
+            </div>
+            <% }%>
+                <form id="form" class="form" action="/users/login" method="post">
+                    <div class="form-control">
+                        <label for="femail">Enter email</label>
+                        <input type="text" id="email" name="email" placeholder="Your email.." required />
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control">
+                        <label for="fpassword">Enter password</label>
+                        <input type="password" id="password" name="password" placeholder="Your password.. " required
+                            value="123456" />
+                        <small>Error Message</small>
+                    </div>
+                    <!--<input type="submit" onclick="return confirm('Please, click Ok to confirm your Signup')" />-->
+                    <input class="submitSignup" type="submit" value="Sign in">
+                </form>
+                <div class="float-login-links">
+                    <div class="float-child-login-link-left">
+                        <a href="/users/signup">Create an account</a>
+                    </div>
+                    <div class="float-child-login-link-right">
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+    </div>
+    <!-- <script type="text/javascript" src="../js/user-signup-validate.js"></script>-->
+</body>
+
+</html>

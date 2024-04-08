@@ -1,0 +1,884 @@
+:root {
+    --success-color: #23cc71;
+    --error-color: #e74c3c;
+    --hover-green-color: #45a049;
+}
+
+/*var(--hover-green-color)*/
+
+/*
+    Support tutorial for NavBard 
+    https://www.youtube.com/watch?v=QHGg_YwGp6U
+    
+    Padding for the page
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    position: relative;
+}
+
+/*
+    Position fixd in the header to make the menu fixed on the top
+*/
+header {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    background-color: darkslategrey;
+}
+
+li {
+    list-style: none;
+}
+
+/*
+    That will make responsive in bigger sizes 
+*/
+.container-navbar {
+    width: 1280px;
+    margin: auto;
+}
+
+.container-navbar2 {
+    width: 1280px;
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.nav-links {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links2 {
+    color: white;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 20px;
+    font-family:
+        monospace,
+        'Trebuchet MS',
+        Gill Sans MT,
+        Geneva,
+        Tahoma,
+        sans-serif;
+    /* border-style:solid;
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 5px;
+    */
+    /* font-family: 'Trebuchet MS', Gill Sans MT, Geneva, Tahoma, sans-serif;    
+   */
+}
+
+/*
+####      CATEGORY DROPDOWN MENU    #############
+*/
+.navbar2 ul li ul.dropdown li {
+    display: block;
+}
+
+.navbar2 ul li ul li {
+    margin-top: 8px;
+    padding: 10px;
+}
+
+.navbar2 ul li ul li a {
+    color: #fff;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    font-family:
+        monospace,
+        'Trebuchet MS',
+        Gill Sans MT,
+        Geneva,
+        Tahoma,
+        sans-serif;
+}
+
+.navbar2 ul li ul.dropdown {
+    background: darkslategrey;
+    position: absolute;
+    z-index: 999;
+    display: none;
+}
+
+.navbar2 ul li:hover ul.dropdown {
+    display: block;
+}
+
+.navbar2 ul li ul li:hover {
+    margin-left: 4px;
+    text-shadow: 0px 0px 30px #fff;
+}
+
+/*
+.arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+*/
+/*
+####   END DROPDOWN MENU #############
+*/
+
+.nav-portfolio {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    margin-left: 0px;
+}
+
+.navbar {
+    width: 95%;
+    margin: auto;
+    min-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar2 {
+    width: 95%;
+    margin-left: 180px;
+    min-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+}
+
+/*
+    Turn the menu to flex-box
+*/
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.nav-menu2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.float-container-navbar-form-links {
+    padding: 12px;
+    justify-content: space-around;
+    display: flex;
+    margin-left: 30px;
+}
+
+.container-body {
+    margin-top: 120px;
+    margin-left: 100px;
+    margin-right: auto;
+}
+
+.container-body h1 {
+    color: darkslategrey;
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.session-1-parent {
+    margin-top: 100px;
+    width: 600px;
+    margin-left: 300px;
+    margin-right: auto;
+    font-family: Helvetica, sans-serif, Verdana, Tahoma;
+}
+
+.session-1-child-1 {
+    width: 70%;
+    height: 100px;
+    float: left;
+}
+
+.session-1-child-1 p {
+    font-size: 16px;
+
+    text-align: center;
+    line-height: 1.5;
+}
+
+.package-list {
+    margin-left: 25px;
+    padding-top: 10px;
+}
+
+.package-list li {
+    list-style-type: circle;
+    line-height: 1.5;
+}
+
+.session-1-child-2 {
+    margin-left: 80%;
+    height: 150px;
+}
+
+.session-2-parent {
+    margin-top: 200px;
+    margin-left: 300px;
+    width: 70%;
+    overflow: hidden;
+    font-family: Helvetica, sans-serif, Verdana, Tahoma;
+}
+
+.session-2-child-1 {
+    width: 500px;
+    float: left;
+}
+
+.session-2-child-2 {
+    margin-left: 450px;
+    width: 44%;
+    margin-top: 70px;
+}
+
+.session-2-child-2 p {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.img-node-js {
+    height: 150px;
+    width: 500px;
+}
+
+.img-mongo {
+    height: 300px;
+    width: 300px;
+}
+
+footer {
+    margin-top: 100px;
+    margin-left: 400px;
+    width: 800px;
+    font-family: Helvetica, sans-serif, Verdana, Tahoma;
+    text-align: center;
+}
+
+.social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid darkslategrey;
+    border-radius: 50%;
+    font-size: 20px;
+    color: darkslategrey;
+    text-decoration: none;
+    margin: 30px 15px 30px 0;
+}
+
+/*
+    When the screen size is less than 1280px the container goes to 100%
+*/
+@media (max-width: 1280px) {
+    .container-navbar {
+        width: 100%;
+    }
+
+    .nav-links {
+        font-size: 15px;
+    }
+}
+
+/*
+#########################################################################################################
+
+ Styles for User Management 
+
+#########################################################################################################
+*/
+.userAdminContainer {
+    width: 100%;
+    margin-top: 130px;
+    margin-bottom: 50px;
+}
+
+.userAdminContainer .searchCreateFeatures {
+    margin-left: 40%;
+
+}
+
+/******************** Session for 'Create a New User link' ************************/
+
+.divAddNewUser {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: darkslategrey;
+}
+
+.divAddNewUser a {
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    color: darkslategrey;
+}
+
+.divAddNewUser a:hover {
+    color: #0f8118;
+    text-shadow: #0f8118;
+}
+
+/* End of the Session */
+
+
+/****************** Session for DIV Search User by ID or Name ************************/
+
+.divSearchUser {
+    width: 50%;
+    margin-top: 40px;
+}
+
+.userSearchInput {
+    padding: 10px;
+    width: 270px !important;
+    font-size: 14px;
+}
+
+.formGetOneUser label {
+    font-size: 18px;
+}
+
+.buttonUserSearch {
+    width: 8%;
+    background-color: darkslategrey;
+    color: white;
+    font-size: 14px;
+    padding: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 18px;
+    border: none;
+    border-radius: 4px;
+}
+
+.buttonUserSearch:hover {
+    background-color: #0f8118;
+}
+
+.buttonGetUsers {
+    width: 30%;
+    background-color: darkslategrey;
+    color: white;
+    font-size: 14px;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 18px;
+    border: none;
+    border-radius: 4px;
+}
+
+.buttonGetUsers:hover {
+    background-color: #0f8118;
+}
+
+/****************************** End of the Session *********************************************************/
+
+/****************************** Session to display a unic User *********************************************/
+
+.hiddenUserResultDetails {
+    width: 50%;
+    margin-top: 10px;
+}
+
+.userInputDisplay {
+    width: 58% !important;
+}
+
+/****************************** End of the Session *********************************************************/
+
+/****************************** Session to display a User Table with all users*********************************************/
+.userMangementTable {
+    margin-top: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.userManagementTableDisplay {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.userManagementTableDisplay tr th {
+    border: 0.5px solid #121a16;
+    background-color: darkslategray;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+}
+
+.userManagementTableDisplay tr td {
+    border: 0.5px solid #121a16;
+    text-align: center;
+    padding: 8px;
+}
+
+.userManagementTableDisplay tr:nth-child(even) {
+    background-color: #8ec5a9;
+    color: #fff;
+}
+
+/**********AUTO-NUMBER TABLE ROWS ************/
+.userManagementTableDisplay {
+    counter-reset: rowNumber;
+}
+
+.userManagementTableDisplay tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
+
+.userManagementTableDisplay tr::before {
+    border: 0.5px solid #121a16;
+    display: table-cell;
+    /*counter-increment: rowNumber;*/
+    content: counter(rowNumber) " ";
+    padding: 8px;
+    text-align: center;
+    margin-top: 6px;
+}
+
+/********************************************/
+.fa-awsome-user-info {
+    color: darkslategray;
+    padding: 14px;
+    font-size: 20px;
+}
+
+/****************************** End of the Session *********************************************************/
+
+.message-user-managemnet {
+    color: #0f7e81;
+    margin-top: 20px;
+    padding: 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.userFormShowOne {
+    width: 350px;
+    margin-left: 0;
+    margin-top: 20px;
+}
+
+.form-control-show-one {
+    width: 100%;
+    margin-bottom: 20px !important;
+}
+
+.form-control-show-one .userFormLabelLeft {
+    float: left;
+    padding: 5px;
+}
+
+.form-control-show-one .userFormLabelLeft label {
+    font-size: 17px;
+}
+
+.form-control-show-one .userTextBoxFloatRight {
+    float: right;
+}
+
+.form-control-show-one .userTextBoxFloatRight .userFormIconMidle {
+    float: left;
+}
+
+.form-control-show-one .userTextBoxFloatRight .userFormInputRight {
+    float: right;
+}
+
+.form-control-show-one .userTextBoxFloatRight .userFormIconMidle i {
+    border: 1px solid #ccc;
+    padding: 5.8px;
+    background-color: #eaececd5;
+
+}
+
+.form-control-show-one .userFormInputRight .inputUserCreate {
+    width: 240px;
+    padding: 6.5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    float: right;
+}
+
+/*
+#########################################################################################################
+
+ Styles for sign up form
+
+#########################################################################################################
+*/
+.userForm {
+    width: 410px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+.form-control {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/************ Session to define the positions of the DIVs **********/
+.form-control .userFormLabelLeft {
+    float: left;
+    padding: 7px;
+}
+
+.form-control .userFormLabelLeft label {
+    font-size: 17px;
+}
+
+.form-control .userTextBoxFloatRight {
+    float: right;
+}
+
+.form-control .userTextBoxFloatRight .userFormIconMidle {
+    float: left;
+}
+
+.form-control .userTextBoxFloatRight .userFormInputRight {
+    float: right;
+}
+
+/******************** End of the session ***********************/
+
+.form-control .userTextBoxFloatRight .userFormIconMidle i {
+    border: 1px solid #ccc;
+    padding: 5.8px;
+    background-color: #eaececd5;
+
+}
+
+.form-control .userTextBoxFloatRight .userFormIconMidle:hover {
+    background-color: var(--hover-green-color);
+
+}
+
+.form-control .userFormInputRight .inputUserCreate {
+    width: 270px;
+    padding: 6.5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    float: right;
+}
+
+.form-control .userFormInputRight .selectCountryUserCreate {
+    width: 288px;
+    padding: 5.7px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    float: right;
+}
+
+.submitSignup {
+    width: 150px;
+    background-color: darkslategrey;
+    color: white;
+    font-size: medium;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 14%;
+    margin-right: auto;
+    margin-top: 15px;
+    border-radius: 18px;
+}
+
+.userCleanButton {
+    width: 150px;
+    background-color: darkslategrey;
+    color: white;
+    font-size: medium;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-left: 5%;
+    border-radius: 18px;
+}
+
+input[type='submit']:hover {
+    background-color: var(--hover-green-color);
+}
+
+.textSignUp {
+    margin-left: 30%;
+    margin-right: auto;
+    margin-bottom: 22px;
+    font-size: 26px;
+}
+
+.form-control .selectCountryUserCreate:focus {
+    outline: 0;
+    border-color: #777;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, .5);
+}
+
+.form-control .inputUserCreate:focus {
+    outline: 0;
+    border-color: #777;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, .5);
+}
+
+
+.form-control-radio {
+    float: left;
+    border-style: solid;
+    border-color: #d3d2d2;
+    margin-top: 11px;
+    width: 150px;
+}
+
+.form-control-radio i {
+    border: 1px solid #ccc;
+    padding: 5.8px;
+    background-color: #eaececd5;
+    margin-left: 0;
+}
+
+.userFormLabelAdminLeft {
+    float: left;
+    padding: 7px;
+    font-size: 17px;
+    margin-top: 12px;
+}
+
+.form-control-radio-parent {
+    float: left;
+}
+
+.admin-icon {
+    float: left;
+}
+
+.form-control-radio-yes {
+    float: left;
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
+.form-control-radio-no {
+    float: right;
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: 7px;
+
+}
+
+.form-control.success input {
+    border-color: var(--success-color);
+}
+
+.form-control.error input {
+    border-color: var(--error-color);
+}
+
+.form-control small {
+    color: var(--error-color);
+    position: center;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small {
+    visibility: visible;
+}
+
+.alert-message {
+    background-color: #259094;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+}
+
+/*
+#########################################################################################################
+
+ Styles for Edit User
+
+#########################################################################################################
+*/
+
+.submitBut {
+    width: 35%;
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.message-user-edit-success {
+    background-color: #c7ecb2;
+    color: #0f7e81;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    padding: 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.userDeleteButton {
+    width: 150px;
+    background-color: darkslategrey;
+    color: white;
+    font-size: medium;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-left: 5%;
+    border-radius: 18px;
+}
+
+.userEditButton {
+    width: 150px;
+    background-color: darkslategrey;
+    color: white;
+    font-size: medium;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-left: 5%;
+    border-radius: 18px;
+}
+
+.fa-awsome-user-edit {
+    color: darkslategray;
+    padding: 14px;
+    font-size: 20px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 5px;
+    margin-left: 45%;
+}
+
+/*
+#########################################################################################################
+
+ Styles for User Login
+
+#########################################################################################################
+*/
+
+.float-login-links {
+    font-family: Helvetica, sans-serif, Verdana, Tahoma;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-left: 60px;
+    width: 100%;
+}
+
+.float-login-links a:hover {
+    color: #4caf50;
+}
+
+.float-child-login-link-left {
+    width: 40%;
+    float: left;
+}
+
+.float-child-login-link-left a {
+    text-decoration: none;
+    font-weight: bold;
+    color: darkslategray;
+}
+
+.float-child-login-link-right {
+    margin-left: 240px;
+}
+
+.float-child-login-link-right a {
+    text-decoration: none;
+    font-weight: bold;
+    color: darkslategray;
+}
+
+.login-invalid-alert {
+    color: red;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 10px;
+}
+
+/*
+#########################################################################################################
+
+ Styles for Authentication failed page
+
+#########################################################################################################
+*/
+
+.auth-error-page {
+    margin-top: 120px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-h1 {
+    color: red;
+}
+
+.auth-p {
+    margin-top: 10px;
+    font-size: large;
+}
+
+.auth-alert-image {
+    margin-left: 25%;
+    margin-top: 15px;
+    width: 50%;
+    height: 50%;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ISRAEL</title>
+    <link href="../css/portfolio-styles.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="/" class="logo">Portfolio.</a>
+        <nav class="navbar">
+            <ul class="navMenu">
+                <li> <a href="#" style="--i:1" class="active">Home</a></li>
+                <li> <a href="#" style="--i:2">About</a></li>
+                <li> <a href="#" style="--i:3">Skills</a>
+                    <ul class="dropdown">
+                        <li><a href="/redirectRoutes/index-node">Node.js <i class='bx bxl-nodejs'></i></a></li>
+                        <li><a href="#">HTML</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">C#</a></li>
+                    </ul>
+                </li>
+                <li> <a href="#" style="--i:4">Portfolio</a></li>
+                <li> <a href="#" style="--i:5">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="home">
+
+        <div class="home-content">
+            <h3> Hello, It's Me</h3>
+            <h1>Israel Ruas</h1>
+            <h3>And I'm a <span class="multiple-text"></span></h3>
+            <p>Highly motivated and self-driven Web Developer with a background in IT support and a passion for
+                crafting innovative software solutions. </p>
+            <div class="social-media">
+                <a href="/redirectRoutes/github" style="--i:7"><i class='bx bxl-github'></i></a>
+                <a href="/redirectRoutes/linkedin" style="--i:8"><i class='bx bxl-linkedin'></i></a>
+                <a href="#" style="--i:9"><i class='bx bxl-facebook'></i></a>
+                <a href="#" style="--i:10"><i class='bx bx-envelope'></i></a>
+            </div>
+            <a href="#" class="btn">Download CV</a>
+        </div>
+        <div class="home-img">
+            <img src="images/israel.png" alt="">
+        </div>
+    </section>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="js/portfolio-script.js"></script>
+</body>
+
+<!--
+<script>
+    /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementsById("navbar").style.top = "0";
+        } else {
+            document.getElementsById("navbar").style.top = "-50px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+</script>
+-->
+
+</html>

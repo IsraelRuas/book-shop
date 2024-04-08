@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<!--AWESOME ICON LINK https://fontawesome.com/search?q=search&o=r&m=free-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ISRAEL</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/css/book-styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">User</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/books/book-management">Books</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/categories/get/category-display">Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/signup">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li>
+                        <a class="nav-links2" href="#">CATEGORIES <i
+                                class="bx bxs-category"></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">ADVENTURE
+                                    <i class="bx bxs-tree-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">CRIME FICTION
+                                    <i class="bx bxs-face-mask"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="bookAdminContainer">
+        <div class="searchCreateFeatures">
+            <h1>Book Management</h1>
+            <div class="divAddNewBook">
+                <a href='/books/create-new-book'> Create a new book <i class="bx bxs-book-add"></i></a>
+            </div>
+            <div class="divSearchBook">
+                <form class="formGetOneBook" id="formGetOneBook" method="get">
+                    <div>
+                        <label for="bookID">Search Book by ID or Title</label>
+                    </div>
+                    <input class="bookInput" type="text" id="bookID" name="bookID" placeholder="Book ID or title.." />
+                    <button onclick="appendBookIdToActionPath()" class="buttonBookSearch">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <div class="formGetallbook">
+                    <form action="/books" method="get">
+                        <button class="buttonGetBooks">
+                            Display Book list
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <% if (book !=false) {%>
+                <div class="hiddenBookResultDetails">
+                    <form>
+                        <div>
+                            <label for="bookID">Title</label>
+                        </div>
+                        <input class="bookInputDisplay" type="text" id="bookID" name="bookID" value="<%=book.name%>"
+                            readonly />
+                        <!--<button class="buttonGetBooks">
+                        <i class="fa-solid fa-info"></i> Details
+                    </button>-->
+                        <div>
+                            <label for="bookID">Description</label>
+                        </div>
+                        <div class="divBookTextArea">
+                            <textarea class="bookTextArea" id="bookInputDisplay" name="bookDesc" rows="4" cols="43"
+                                readonly><%=book.description%></textarea>
+                        </div>
+                        <div>
+                            <label for="bookID">Price $</label>
+                        </div>
+                        <input class="bookInputDisplay" type="text" id="bookPrice" name="bookPrice"
+                            value="<%=book.price%>" readonly />
+                    </form>
+                </div>
+                <%}%>
+        </div>
+
+        <% if (booksListDisplay !=false) {%>
+            <% if ( typeof(booksListDisplay) !="undefined" ) {%>
+                <%booksListDisplay.forEach(book=> { %>
+                    <div class="container-book-display">
+                        <div class="bookDisplayParent">
+                            <div class="bookDisplayChildLeft">
+                                <img src="<%= book.image%>" alt="<%= book.name%>" class="displayBookImage">
+                            </div>
+                            <div class="bookDisplayChildMidle">
+                                <div class="bookName">
+                                    <%= book.name%>
+                                </div>
+                                <div class="lineBookDisplay"></div>
+                                <div class="bookDescription">
+                                    <%= book.description %>
+                                </div>
+                                <div class="lineBookDisplay"></div>
+                                <div class="bookCategory">
+                                    <script>
+                                        var categoryColor = document.getElementById("categoryColor");
+                                        categoryColor.style.color = "<%= book.category.color %>";
+                                    </script>
+                                    Category: <spam id="categoryColor">
+                                        <%= book.category.name %>
+                                    </spam>
+                                </div>
+                                <div class="lineBookDisplay"></div>
+                                <div class="bookAuthor">
+                                    Author: <spam>
+                                        <%= book.author %>
+                                    </spam>
+                                </div>
+                            </div>
+                            <div class="bookDisplayChildRight">
+                                <div class="bookPrice">
+                                    $<%= book.price%>
+                                </div>
+                                <div class="bookInfo">
+                                    <a class="fa-awsome" href="/books/get/<%= book.id %>">
+                                        <i class="fa-solid fa-circle-info"></i></a>
+                                </div>
+                                <% if (book.countInStock> 0){%>
+                                    <div class="bookInStock">
+                                        <p>In stock</p>
+                                    </div>
+                                    <%}else{%>
+                                        <div class="bookOutStock">
+                                            <p>Out stock</p>
+                                        </div>
+                                        <%}%>
+                                            <div class="buttonsDisplayBook">
+                                                <select class="bookQuantity" name="bookQuantity" id="bookQuantity"
+                                                    onclick=" populateBookQuantity('<%=book.countInStock%>')">
+                                                    <option value="1"> Qunatity: 1</option>
+                                                </select>
+                                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%})%>
+
+                        <%}%>
+
+                            <%}%>
+
+    </div>
+    <script type="text/javascript" src="/js/book-scripts.js"></script>
+</body>
+
+</html>

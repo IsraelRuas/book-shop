@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<!--AWESOME ICON LINK https://fontawesome.com/search?q=search&o=r&m=free-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ISRAEL</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/user-management">User</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/books/book-management">Books</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/categories/get/category-display">Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/signup">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li>
+                        <a class="nav-links2" href="#">CATEGORIES <i
+                                class="bx bxs-category"></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">ADVENTURE
+                                    <i class="bx bxs-tree-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">CRIME FICTION
+                                    <i class="bx bxs-face-mask"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="home">
+        <div class="userForm">
+            <h1 class="textSignUp">Edit User&nbsp;&nbsp; <i class="fa-solid fa-user-pen"></i></h1>
+
+            <% if (typeof(message) !="undefined" ) {%>
+                <% if (message.length> 0){ %>
+                    <div class="message-user-edit-success">
+                        <i class="fa-solid fa-square-check"></i>
+                        <%= message %>
+                    </div>
+                    <%}%>
+                        <%}%>
+                            <form action="/users/admin-user-edit/<%- User.id%>" method="post">
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="fname">Name: </label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-regular fa-user"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <input class="inputUserCreate" type="text" id="name" name="name"
+                                                placeholder="Your name.." value="<%- User.name%>" />
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="fphone">Phone:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-sharp fa-solid fa-phone"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <input class="inputUserCreate" type="text" id="phone" name="phone"
+                                                placeholder="Your phone.." value="<%-User.phone%>" />
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="femail">Email:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-regular fa-envelope"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <input class="inputUserCreate" type="text" id="email" name="email"
+                                                placeholder="Your email.." value="<%-User.email%>" />
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control" style="margin-bottom: 24px;">
+                                    <div class="userFormLabelLeft">
+                                        <label for="faddress">Address:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <textarea class="inputUserCreate" id="address" name="address" rows="3"
+                                                cols="43"><%-User.address%></textarea>
+                                            <!--<input class="inputUserCreate" type="text" id="address" name="address"
+                                    placeholder="Your address.." value="27/" />
+                                    -->
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="fpostcode">Post Code:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-solid fa-map-location-dot"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <input class="inputUserCreate" type="number" id="postCode" name="postCode"
+                                                placeholder="Your Post Code.." value="<%-User.postCode%>" />
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="fcity">City:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-solid fa-tree-city"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <input class="inputUserCreate" type="text" id="city" name="city"
+                                                placeholder="Your City.." value="Gold Coast" />
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="fcountry">Country:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-solid fa-earth-americas"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <select class="selectCountryUserCreate" name="country" id="countrySelect">
+                                                <option><%- User.country%></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelLeft">
+                                        <label for="fpassword">Password:</label>
+                                    </div>
+                                    <div class="userTextBoxFloatRight">
+                                        <div class="userFormIconMidle">
+                                            <i class="fa-solid fa-key"></i>
+                                        </div>
+                                        <div class="userFormInputRight">
+                                            <input class="inputUserCreate" type="password" id="password" name="password"
+                                                placeholder="Your password.." value="User.password" />
+                                        </div>
+                                    </div>
+                                    <small>Error Message</small>
+                                </div>
+                                <div class="form-control">
+                                    <div class="userFormLabelAdminLeft">
+                                        <label for="fadminCredential">Admin Credential: </label>
+                                    </div>
+                                    <div class="form-control-radio">
+
+                                        <div class="form-control-radio-parent">
+                                            <div class="admin-icon">
+                                                <i class="fa-solid fa-user-tie"></i>
+                                            </div>
+                                            <div class="form-control-radio-yes">
+                                                <input type="radio" class="radioAdmin" id="isAdmin" name="isAdmin"
+                                                    value="true">
+                                                <label for="adminYes">Yes</label><br>
+                                            </div>
+                                            <div class="form-control-radio-no">
+                                                <input type="radio" class="radioAdmin" id="isAdmin" name="isAdmin"
+                                                    value="false" checked>
+                                                <label for="adminNo">No</label><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="userEditButton" type="submit">Edit <i class="fa-solid fa-pencil"></i>
+                                </button>
+                                <button type="button" onClick="removeConfirmation('<%=User.name%>', '<%=User.id%>')"
+                                    class="userDeleteButton ">Delete <i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+        </div>
+    </div>
+    <!--Condition to check if the user is admin. If the value is true, the Radio Button isAdmin gets checked-->
+    <% if (User.isAdmin){%>
+        <script>
+            document.getElementById("isAdmin").checked = true;                                    
+        </script>
+        <%}%>
+            <script type="text/javascript" src="/js/country-select.js"></script>
+            <script type="text/javascript" src="/js/user-management-scripts.js"></script>
+</body>
+
+</html>

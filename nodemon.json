@@ -1,0 +1,10 @@
+{
+    "_comment": "Password for the MongoDB",
+    "env": {
+        "MONGO_ATLAS_PW": "Mancha07",
+        "JWT_KEY": "secret",
+        "USER_MASTER": "israel-ruas",
+        "USER_MASTER_PASSWORD": "123456",
+        "MONGO_CONNECTION_URL": "mongodb+srv://israelruas:Mancha07@node-rest-shop.pwaeqsh.mongodb.net/?retryWrites=true&w=majority"
+    }
+}

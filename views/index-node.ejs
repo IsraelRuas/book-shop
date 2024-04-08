@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<!--BOXICONS https://boxicons.com/-->
+
+<head>
+    <meta charset="utf-8">
+    <title>Node.js</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li><a class="nav-links" href="/redirectRoutes/index-node">Home</a></li>
+                    <li><a class="nav-links" href="/redirectRoutes/about">About</a></li>
+                    <li><a class="nav-links" href="/users/admin-user-management">User</a></li>
+                    <li><a class="nav-links" href="/books/book-management">Books</a></li>
+                    <li><a class="nav-links" href="/users/admin-user-management">Order</a></li>
+                    <li><a class="nav-links" href="/categories/admin-category-management">Category</a></li>
+                    <li><a class="nav-links" href="/users/admin-user-management">Sales</a></li>
+                    <li><a class="nav-links" href="/users/login">Sign in</a></li>
+                    <li><a class="nav-links" href="/users/signup">Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li><a class="nav-links2" href="#">CATEGORIES <i
+                                class='bx bxs-category'></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li><a href="#">ADVENTURE <i class='bx bxs-tree-alt'></i></a></li>
+                            <li><a href="#">CRIME FICTION <i class='bx bxs-face-mask'></i></a></li>
+                            <li><a href="#">FANTASY <i class='bx bxs-castle'></i></a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-links2" href="#">BOOKS <i class='bx bxs-book'></i></a></li>
+                    <li><a class="nav-links2" href="#">ORDER <i class='bx bxs-cart'></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section>
+        <div class="container-body">
+
+            <h1>Node.js & Mongoose DB</h1>
+            <div class="session-1-parent">
+                <div class="session-1-child-1">
+                    <p>
+                        Node.js is a server-side JavaScript runtime environment, leveraging Chrome's V8 engine,
+                        facilitating
+                        the creation of scalable network applications outside web browsers.
+                        <br>
+                        <br>
+                        This aplication handle many packages such as:
+                    </p>
+                    <ul class="package-list">
+                        <li><b>Morgan</b> - handle error.</li>
+                        <li><b>Body-parser</b> - parse the body.</li>
+                        <li><b>Mongoose</b> - store simple data.</li>
+                        <li><b>Bcrypt</b> - hash/encript password.</li>
+                        <li><b>Jsonwebtoken</b> - generate token for authentication.</li>
+                        <li><b>Nodemon</b> - monitors and automatically restarts the app.</li>
+                        <li><b>Render</b> - Redirect pages.</li>
+                        <li><b>Flash</b> - send messages to pages .EJS.</li>
+                    </ul>
+                </div>
+                <div class="session-1-child-2">
+                    <img src="/images/node-js.png" class="img-node-js" />
+                </div>
+            </div>
+            <div class="session-2-parent">
+                <div class="session-2-child-1">
+                    <img src="/images/mongo.png" class="img-mongo" />
+                </div>
+                <div class="session-2-child-2">
+                    <p>
+                        MongooseDB, a MongoDB object modeling tool for Node.js, simplifies interactions with MongoDB
+                        databases by providing a schema-based solution. It offers features like validation, casting, and
+                        query building, enhancing code readability and reducing boilerplate.
+                        <br><br>
+                        With Mongoose, I was able to manipulate the data from shemas <b>User</b>, <b>Book</b> and
+                        <b>Order</b> in the use way with modules.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer style="margin-bottom: 15px;">
+        <div class="social-media">
+            <a href="/redirectRoutes/github"><i class='bx bxl-github'></i></a>
+            <a href="/redirectRoutes/linkedin"><i class='bx bxl-linkedin'></i></a>
+            <a href="/users/login"><i class='bx bx-log-in-circle'></i></a>
+            <a href="#"><i class='bx bx-envelope'></i></a>
+        </div>
+        <div>
+            <span><a href="/redirectRoutes/about">Info</a></span> - <span><a href="/users/signup">Signup</a></span>
+            - <span><a href="/redirectRoutes/index-node">Home</a></span>
+        </div>
+        <div>
+            <!--<a href="#">Terms of Use - Privacy Policy</a>-->
+        </div>
+        <div style="margin-top: 10px; " class="footer-copy">
+            <p>&copy; 2024 Israel - Node.js. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

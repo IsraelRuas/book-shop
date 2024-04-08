@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<!--AWESOME ICON LINK https://fontawesome.com/search?q=search&o=r&m=free-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ISRAEL</title>
+    <link href="../css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/css/category-styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/user-management">User</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/books/book-management">Books</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/categories/admin-category-management">Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/signup">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li>
+                        <a class="nav-links2" href="#">CATEGORIES <i
+                                class="bx bxs-category"></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">ADVENTURE
+                                    <i class="bx bxs-tree-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">CRIME FICTION
+                                    <i class="bx bxs-face-mask"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="categoryForm">
+        <h1 class="textH1CreateCategory">Edit Category <i class="fa-solid fa-category"></i></h1>
+        <% if (typeof(message) !="undefined" ) {%>
+            <% if (message.length> 0){ %>
+                <div class="alert-message">
+                    <%= message %>
+                </div>
+                <% }%>
+                    <% }%>
+                        <form id="categorySignUpForm" class="categorySignUpForm"
+                            action="/categories/admin-category-edit/<%- category.id%>" method="post">
+                            <div class="form-control-category">
+                                <div class="categoryFormLabelLeft">
+                                    <label for="fname">Name:</label>
+                                </div>
+                                <div class="categoryTextBoxFloatRight">
+                                    <div class="categoryFormIconMidle">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                    </div>
+                                    <div class="categoryFormInputRight">
+                                        <input class="inputCategoryCreate" type="text" id="name" name="name"
+                                            placeholder="Category name.." value="<%- category.name%>" />
+                                    </div>
+                                </div>
+                                <small>Error Message</small>
+                            </div>
+                            <div class="form-control-category">
+                                <div class="categoryFormLabelLeft">
+                                    <label for="fdescription">Description:</label>
+                                </div>
+                                <div class="categoryTextBoxFloatRight">
+                                    <div class="categoryFormIconMidle">
+                                        <i class="fa-solid fa-align-left" style="width: 18px;"></i>
+                                    </div>
+                                    <div class="categoryFormInputRight">
+                                        <input class="inputCategoryCreate" type="text" id="description"
+                                            name="description" name="fdescription" placeholder="Description name.."
+                                            value="<%- category.description%>" />
+                                    </div>
+                                </div>
+                                <small>Error Message</small>
+                            </div>
+                            <div class="form-control-category">
+                                <div class="categoryFormLabelLeft">
+                                    <label for="fcolor">Click to choose the color:</label>
+                                    <i class="fa-solid fa-palette"></i>
+                                </div>
+                                <div class="categoryFormInputRight">
+                                    <input class="inputCategoryColor" type="color" id="color" name="color"
+                                        value="<%- category.color%>" />
+                                </div>
+                                <small>Error Message</small>
+                            </div>
+                            <!--<input type="submit" onclick="return confirm('Please, click Ok to confirm your Signup')" />-->
+                            <input class="submitSignup" type="submit" onclick="window.location.reload()">
+                            <button type="button" onClick="removeConfirmation('<%=category.name%>', '<%=category.id%>')"
+                                class="userDeleteButton ">Delete <i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+    </div>
+    <script type="text/javascript" src="/js/category-management-scripts.js"></script>
+</body>
+
+</html>

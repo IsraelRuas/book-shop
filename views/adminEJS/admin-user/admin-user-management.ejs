@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<!--AWESOME ICON LINK https://fontawesome.com/search?q=search&o=r&m=free-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ISRAEL</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/user-management">User</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/books/book-management">Books</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/categories/get/category-display">Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/signup">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li>
+                        <a class="nav-links2" href="#">CATEGORIES <i
+                                class="bx bxs-category"></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">ADVENTURE
+                                    <i class="bx bxs-tree-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">CRIME FICTION
+                                    <i class="bx bxs-face-mask"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="userAdminContainer">
+        <div class="searchCreateFeatures">
+            <h1>User Management</h1>
+            <div class="divAddNewUser">
+                <a href="/users/signup"> Create a new user <i class="fa-solid fa-user-plus"></i></a>
+            </div>
+            <div class="divSearchUser">
+                <form class="formGetOneUser" id="formGetOneUser" method="get">
+                    <div>
+                        <label for="userID">Search User by ID or Name</label>
+                    </div>
+                    <input class="userSearchInput" type="text" id="userIdOrName" name="userIdOrName"
+                        placeholder="User ID or name.." />
+                    <button onclick="appendUserIdToActionPath()" class="buttonUserSearch">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <div class="formGetallUser">
+                    <form action="/users" method="get">
+                        <button class="buttonGetUsers">
+                            <i class="fa-solid fa-list"></i> Display User list
+                        </button>
+                    </form>
+                    <% if (typeof(message) !="undefined" ) {%>
+                        <% if (message.length> 0){ %>
+                            <div class="message-user-managemnet">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <%= message %>
+                            </div>
+                            <%}%>
+                                <%}%>
+                </div>
+            </div>
+            <% if (user !=false) {%>
+                <div class="userFormShowOne">
+                    <div class="form-control-show-one">
+                        <div class="userFormLabelLeft">
+                            <label for="fname">Name: </label>
+                        </div>
+                        <div class="userTextBoxFloatRight">
+                            <div class="userFormIconMidle">
+                                <i class="fa-regular fa-user"></i>
+                            </div>
+                            <div class="userFormInputRight">
+                                <input class="inputUserCreate" type="text" id="name" name="name" value="<%- user.name%>"
+                                    readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="form-control-show-one">
+                        <div class="userFormLabelLeft">
+                            <label for="femail">Email: </label>
+                        </div>
+                        <div class="userTextBoxFloatRight">
+                            <div class="userFormIconMidle">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div class="userFormInputRight">
+                                <input class="inputUserCreate" type="text" id="email" name="email"
+                                    value="<%- user.email%>" readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-control-show-one">
+                        <div class="userFormLabelLeft">
+                            <label for="fphone">Phone: </label>
+                        </div>
+                        <div class="userTextBoxFloatRight">
+                            <div class="userFormIconMidle">
+                                <i class="fa-sharp fa-solid fa-phone"></i>
+                            </div>
+                            <div class="userFormInputRight">
+                                <input class="inputUserCreate" type="text" id="phone" name="phone"
+                                    value="<%- user.phone%>" readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div><a class="fa-awsome-user-edit" href="/users/get/<%= user.id %>">
+                            Edit <i class="fa-solid fa-pen-to-square"></i></a></div>
+                </div>
+                <%}%>
+        </div>
+        <div class="userMangementTable">
+            <% if (usersListDisplay !=false) {%>
+                <% if ( typeof(usersListDisplay) !="undefined" ) {%>
+                    <table cellpadding="0" class="userManagementTableDisplay" id="userManagementTableDisplay">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Edit</th>
+                        </tr>
+                        <%usersListDisplay.forEach(user=> { %>
+                            <tr>
+                                <td>
+                                    <%= user.name%>
+                                </td>
+
+                                <td>
+                                    <%= user.email%>
+                                </td>
+                                <td>
+                                    <%= user.phone%>
+                                </td>
+                                <!-- More Info call the page to populate and edit-->
+                                <td><a class="fa-awsome-user-info" href="/users/get/<%= user.id %>">
+                                        <i class="fa-solid fa-pen-to-square"></i></a></td>
+                                <%})%>
+                            </tr>
+                    </table>
+                    <%}%>
+
+                        <%}%>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/user-management-scripts.js"></script>
+</body>
+
+</html>

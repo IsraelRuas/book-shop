@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<!--AWESOME ICON LINK https://fontawesome.com/search?q=search&o=r&m=free-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ISRAEL</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">User</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/books/book-management">Books</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/categories/get/category-display">Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/signup">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li>
+                        <a class="nav-links2" href="#">CATEGORIES <i
+                                class="bx bxs-category"></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">ADVENTURE
+                                    <i class="bx bxs-tree-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">CRIME FICTION
+                                    <i class="bx bxs-face-mask"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="home">
+        <div class="userForm">
+            <h1 class="textSignUp">View Book</h1>
+            <form action="/books/<%- book.id%>" method="post">
+                <div class="form-control">
+                    <label for="fname">Title</label>
+                    <input type="text" id="name" name="name" value="<%- book.name%>" />
+                    <small>Error Message</small>
+                </div>
+                <div class="form-control">
+                    <label for="fphone">Description</label>
+                    <input type="text" id="description" name="description" value="<%- book.description%>" />
+                    <small>Error Message</small>
+                </div>
+                <div class="form-control">
+                    <label for="femail">Price $</label>
+                    <input type="text" id="price" name="price" value="<%- book.price%>" />
+                    <small>Error Message</small>
+                </div>
+
+                <input class="submitBut" type="submit" />
+            </form>
+        </div>
+    </div>

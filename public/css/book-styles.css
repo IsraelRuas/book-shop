@@ -1,0 +1,444 @@
+/*
+#########################################################################################################
+
+ Styles for Book Management
+
+#########################################################################################################
+*/
+
+.bookAdminContainer {
+    width: 100%;
+    margin-top: 130px;
+    margin-bottom: 50px;
+}
+
+.bookAdminContainer .searchCreateFeatures {
+    margin-left: 40%;
+
+}
+
+/******************** Session for 'Create a New Book link' ************************/
+
+.divAddNewBook {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    color: darkslategrey;
+}
+
+.divAddNewBook a {
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    color: darkslategrey;
+}
+
+.divAddNewBook a:hover {
+    color: #0f8118;
+    text-shadow: #0f8118;
+}
+
+/* End of the Session */
+
+
+/****************** Session for DIV Search Book by ID or Name ************************/
+
+.divSearchBook {
+    width: 50%;
+    margin-top: 40px;
+}
+
+.bookInput {
+    width: 50% !important;
+}
+
+.formGetOneBook label {
+    font-size: 18px;
+}
+
+.buttonBookSearch {
+    width: 8%;
+    background-color: darkslategrey;
+    color: white;
+    font-size: 14px;
+    padding: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 18px;
+    border: none;
+    border-radius: 4px;
+}
+
+.buttonBookSearch:hover {
+    background-color: #0f8118;
+}
+
+.buttonGetBooks {
+    width: 30%;
+    background-color: darkslategrey;
+    color: white;
+    font-size: 14px;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 18px;
+    border: none;
+    border-radius: 4px;
+}
+
+.buttonGetBooks:hover {
+    background-color: #0f8118;
+}
+
+/****************************** End of the Session *********************************************************/
+
+/****************************** Session to display a unic book *********************************************/
+
+.hiddenBookResultDetails {
+    width: 50%;
+    margin-top: 10px;
+}
+
+.bookInputDisplay {
+    width: 58% !important;
+}
+
+.divBookTextArea {
+    margin-top: 6px;
+}
+
+.divBookTextArea .bookTextArea {
+    border-style: groove;
+    border-color: #cac2c2;
+}
+
+/****************************** End of the Session *********************************************************/
+
+/****************************** BOOK DISPLAY SESSION ************************************/
+
+.container-book-display {
+    margin-left: 18%;
+    margin-right: 18%;
+    margin-top: 50px;
+}
+
+.bookDisplayParent {
+    display: flex;
+}
+
+.bookDisplayChildLeft {
+    float: left;
+
+}
+
+.bookDisplayChildLeft .displayBookImage {
+    height: 466px;
+    width: 309px;
+}
+
+.bookDisplayChildMidle {
+    float: left;
+    margin-left: 3%;
+    margin-right: 5%;
+    width: 50%;
+}
+
+.lineBookDisplay {
+    border-bottom: 1px solid rgb(202, 196, 196);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.bookDisplayChildMidle .bookName {
+    font-size: 30px;
+
+}
+
+.bookDisplayChildMidle .bookDescription {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.bookDisplayChildMidle .bookCategory {
+    font-size: 16px;
+}
+
+.bookDisplayChildMidle .bookAuthor {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.bookDisplayChildMidle .bookAuthor spam {
+    font-weight: bold;
+}
+
+.bookDisplayChildRight {
+    float: left;
+    width: 200px;
+}
+
+.bookDisplayChildRight .bookPrice {
+    margin-top: 30px;
+    font-size: 24px;
+    font-style: bold;
+}
+
+.bookDisplayChildRight .bookInfo {
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.bookDisplayChildRight .bookInStock {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #0f8118;
+}
+
+.bookDisplayChildRight .bookOutStock {
+    margin-top: 30px;
+    font-size: 24px;
+    color: red;
+}
+
+/*
+#########################################################################################################
+
+ Styles for CREATE A NEW BOOK
+
+#########################################################################################################
+*/
+.bookForm {
+    width: 430px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+.textH1CreateBook {
+    margin-left: 30%;
+    margin-right: auto;
+    margin-bottom: 22px;
+    font-size: 26px;
+}
+
+.form-control-book {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/************ Session to define the positions of the DIVs **********/
+
+
+.form-control-book .bookFormLabelLeft {
+    float: left;
+    padding: 7px;
+}
+
+.form-control-book .bookFormLabelLeft label {
+    font-size: 17px;
+}
+
+.form-control-book .bookTextBoxFloatRight {
+    float: right;
+}
+
+.form-control-book .bookTextBoxFloatRight .bookFormIconMidle {
+    float: left;
+}
+
+.form-control-book .bookTextBoxFloatRight .bookFormInputRight {
+    float: right;
+}
+
+/******************** End of the session ***********************/
+
+.form-control-book .bookTextBoxFloatRight .bookFormIconMidle i {
+    border: 1px solid #ccc;
+    padding: 5.8px;
+    background-color: #eaececd5;
+
+}
+
+.form-control-book .bookTextBoxFloatRight .bookFormIconMidle:hover {
+    background-color: var(--hover-green-color);
+
+}
+
+.form-control-book .bookFormInputRight .inputBookCreate {
+    width: 270px;
+    padding: 6.5px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    float: right;
+}
+
+.form-control-book .bookFormInputRight .selectCategoryBookCreate {
+    width: 284px;
+    padding: 5.7px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    float: right;
+}
+
+.submitSignup {
+    width: 150px;
+    background-color: darkslategrey;
+    color: white;
+    font-size: medium;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 14%;
+    margin-right: auto;
+    margin-top: 15px;
+    border-radius: 18px;
+}
+
+.bookCleanButton {
+    width: 150px;
+    background-color: darkslategrey;
+    color: white;
+    font-size: medium;
+    padding: 10px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-left: 5%;
+    border-radius: 18px;
+}
+
+.form-control-book .selectCategoryBookCreate:focus {
+    outline: 0;
+    border-color: #777;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, .5);
+}
+
+.form-control-book .inputBookCreate:focus {
+    outline: 0;
+    border-color: #777;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, .5);
+}
+
+
+.form-control-book-radio {
+    float: left;
+    border-style: solid;
+    border-color: #d3d2d2;
+    margin-top: 11px;
+    width: 150px;
+}
+
+.form-control-book-radio i {
+    border: 1px solid #ccc;
+    padding: 5.8px;
+    background-color: #eaececd5;
+    margin-left: 0;
+}
+
+.bookFormLabelAdminLeft {
+    float: left;
+    padding: 7px;
+    font-size: 17px;
+    margin-top: 12px;
+}
+
+.form-control-book-radio-parent {
+    float: left;
+}
+
+.admin-icon {
+    float: left;
+}
+
+.form-control-book-radio-yes {
+    float: left;
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
+.form-control-book-radio-no {
+    float: right;
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: 7px;
+
+}
+
+.form-control-book.success input {
+    border-color: var(--success-color);
+}
+
+.form-control-book.error input {
+    border-color: var(--error-color);
+}
+
+.form-control-book small {
+    color: var(--error-color);
+    position: center;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control-book.error small {
+    visibility: visible;
+}
+
+.alert-message {
+    background-color: #259094;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+}
+
+.form-control-book-radio {
+    float: left;
+    border-style: solid;
+    border-color: #d3d2d2;
+    margin-top: 11px;
+    width: 150px;
+}
+
+.form-control-book-radio-parent {
+    float: left;
+}
+
+.bookMark-icon {
+    float: left;
+}
+
+.form-control-book-radio-yes {
+    float: left;
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
+.form-control-book-radio-no {
+    float: right;
+    margin-left: 15px;
+    margin-right: 5px;
+    margin-top: 7px;
+
+}
+
+.form-control-book .bookTextBoxFloatRight .bookFormIconMidlePrice {
+    float: left;
+}
+
+.form-control-book .bookTextBoxFloatRight .bookFormIconMidlePrice i {
+    border: 1px solid #ccc;
+    padding: 6px;
+    background-color: #eaececd5;
+    width: 17px;
+}

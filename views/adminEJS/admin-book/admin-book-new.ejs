@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<!--AWESOME ICON LINK https://fontawesome.com/search?q=search&o=r&m=free-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ISRAEL</title>
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="/css/book-styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="container-navbar">
+            <nav class="navbar">
+                <a href="/" class="nav-portfolio">Portfolio.</a>
+                <ul class="nav-menu">
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/user-management">User</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/books/book-management">Books</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/categories/admin-category-management">Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/login">Sign in</a>
+                    </li>
+                    <li>
+                        <a class="nav-links" href="/users/signup">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container-navbar2">
+            <nav class="navbar2">
+                <ul class="nav-menu2">
+                    <li>
+                        <a class="nav-links2" href="#">CATEGORIES <i
+                                class="bx bxs-category"></i></a><!--<i class="arrow down"></i></p>-->
+                        <!--ARROW DOWN CODE &#9660;-->
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#">ADVENTURE
+                                    <i class="bx bxs-tree-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">CRIME FICTION
+                                    <i class="bx bxs-face-mask"></i></a>
+                            </li>
+                            <li>
+                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                    </li>
+                    <li>
+                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="bookForm">
+        <h1 class="textH1CreateBook">Create new Book <i class="fa-solid fa-book"></i></h1>
+        <% if (message.length> 0){ %>
+            <div class="alert-message">
+                <%= message %>
+            </div>
+            <% }%>
+                <form id="bookSignUpForm" class="bookSignUpForm" action="/books" method="post"
+                    enctype="multipart/form-data">
+                    <!-- This value "multipart/form-data" is necessary if the user will upload a file through the form-->
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fname">Name: </label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <textarea class="inputBookCreate" id="name" name="name" rows="2"
+                                    cols="43">Rich Dad Poor Dad</textarea>
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book" style="margin-bottom: 200px; margin-top: 25px;">
+                        <div class="bookFormLabelLeft">
+                            <label for="fdescription">Description:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-solid fa-align-left"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <textarea class="inputBookCreate" id="description" name="description" rows="15"
+                                    cols="43">The Book in Three Sentences
+                                    Rich Dad Poor Dad is about Robert Kiyosaki and his two dads—his real father (poor dad) and the father of his best friend (rich dad)—and the ways in which both men shaped his thoughts about money and investing.
+                                    You don’t need to earn a high income to be rich.
+                                    Rich people make money work for them.
+                                    </textarea>
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fauthor">Author/es:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-solid fa-pen-fancy"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <input class="inputBookCreate" type="text" id="author" name="author"
+                                    placeholder="Book Author/es.." value="Robert T. Kiyosaki" />
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fcategory">Category:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <% if (categoriesListDisplay !=false) {%>
+                                    <% if ( typeof(categoriesListDisplay) !="undefined" ) {%>
+                                        <select class="selectCategoryBookCreate" name="category" id="category">
+                                            <option value="">Choose..</option>
+                                            <%categoriesListDisplay.forEach(category=> { %>
+                                                <option value="<%= category.id%>">
+                                                    <%= category.name%>
+                                                </option>
+                                                <%})%>
+                                        </select>
+                                        <%}%>
+                                            <%}%>
+                                                <% if (messageCategory !=false) {%>
+                                                    <% if ( typeof(messageCategory) !="undefined" ) {%>
+                                                        <%= messageCategory%>
+                                                            <%}%>
+                                                                <%}%>
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fisbn">ISBN:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-solid fa-barcode"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <input class="inputBookCreate" type="isbn" id="fisbn" name="isbn"
+                                    placeholder="Book ISBN.." value="9781612680194" />
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fprice">Price:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidlePrice">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <input class="inputBookCreate" type="text" id="price" name="price"
+                                    placeholder="Book price $.." value="40" />
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fimage">Image:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-regular fa-image"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <input type="file" id="bookImage" name="bookImage" accept="image/*"
+                                    style="margin-right: 33px;">
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelLeft">
+                            <label for="fcountInStock">Stock:</label>
+                        </div>
+                        <div class="bookTextBoxFloatRight">
+                            <div class="bookFormIconMidle">
+                                <i class="fa-solid fa-cubes"></i>
+                            </div>
+                            <div class="bookFormInputRight">
+                                <input class="inputBookCreate" type="countInStock" id="countInStock" name="countInStock"
+                                    placeholder="Stock.." value="25" />
+                            </div>
+                        </div>
+                        <small>Error Message</small>
+                    </div>
+                    <div class="form-control-book">
+                        <div class="bookFormLabelAdminLeft" Style="margin-right: 34px;">
+                            <label for="ffeatured">Featured: </label>
+                        </div>
+                        <div class="form-control-book-radio">
+                            <div class="form-control-book-radio-parent">
+                                <div class="bookMark-icon">
+                                    <i class="fa-solid fa-bookmark"></i>
+                                </div>
+                                <div class="form-control-book-radio-yes">
+                                    <input type="radio" class="radioAdmin" id="featured" name="featured" value="true">
+                                    <label for="adminYes">Yes</label><br>
+                                </div>
+                                <div class="form-control-book-radio-no">
+                                    <input type="radio" class="radioAdmin" id="featured" name="featured" value="false"
+                                        checked>
+                                    <label for="adminNo">No</label><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<input type="submit" onclick="return confirm('Please, click Ok to confirm your Signup')" />-->
+                    <input class="submitSignup" type="submit" onclick="window.location.reload()">
+                    <button type="button" onclick="cleanForm()" class="bookCleanButton"><i
+                            class="fa-solid fa-broom"></i>Clean</button>
+                </form>
+
+    </div>
+</body>
+
+</html>
