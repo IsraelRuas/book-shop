@@ -100,6 +100,14 @@
                             Display Book list
                         </button>
                     </form>
+                    <% if (typeof(message) !="undefined" ) {%>
+                        <% if (message.length> 0){ %>
+                            <div class="message-book-managemnet">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <%= message %>
+                            </div>
+                            <%}%>
+                                <%}%>
                 </div>
             </div>
             <% if (book !=false) {%>
@@ -148,13 +156,8 @@
                                 </div>
                                 <div class="lineBookDisplay"></div>
                                 <div class="bookCategory">
-                                    <script>
-                                        var categoryColor = document.getElementById("categoryColor");
-                                        categoryColor.style.color = "<%= book.category.color %>";
-                                    </script>
-                                    Category: <spam id="categoryColor">
-                                        <%= book.category.name %>
-                                    </spam>
+                                    Category: <%= book.category.name %>
+                                        <i class="fa-solid fa-flag" style="color: <%= book.category.color %>"></i>
                                 </div>
                                 <div class="lineBookDisplay"></div>
                                 <div class="bookAuthor">
@@ -181,8 +184,8 @@
                                         </div>
                                         <%}%>
                                             <div class="buttonsDisplayBook">
-                                                <select class="bookQuantity" name="bookQuantity" id="bookQuantity"
-                                                    onclick=" populateBookQuantity('<%=book.countInStock%>')">
+                                                <select class="bookQuantity" name="bookQuantity" id="<%=book.name%>"
+                                                    onclick="populateBookQuantity('<%=book.countInStock%>', '<%=book.name%>')">
                                                     <option value="1"> Qunatity: 1</option>
                                                 </select>
                                             </div>

@@ -49,6 +49,7 @@
 
 .bookInput {
     width: 50% !important;
+    padding: 10px;
 }
 
 .formGetOneBook label {
@@ -201,6 +202,14 @@
     margin-top: 30px;
     font-size: 24px;
     color: red;
+}
+
+.message-book-managemnet {
+    color: #0f7e81;
+    margin-top: 20px;
+    padding: 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /*
