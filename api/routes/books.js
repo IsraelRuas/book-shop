@@ -96,7 +96,8 @@ router.get('/get/:bookId', booksController.getBookById)
 /*
     POST to update book by ID 
 */
-router.post('/:bookId', booksController.updateBook)
+
+router.post('/admin-book-edit/:bookId', booksController.updateBook)
 
 /*
     PUT to update galery of images by ID 
@@ -108,7 +109,7 @@ router.put(
 )
 
 /*
-    DELETE to delete book by ID 
+    GET to delete book by ID 
 */
-router.delete('/:bookId', booksController.deleteBook)
+router.get('/delete/:bookId', booksController.deleteBook)
 module.exports = router

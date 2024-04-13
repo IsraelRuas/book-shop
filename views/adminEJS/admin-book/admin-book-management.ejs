@@ -18,10 +18,10 @@
                 <a href="/" class="nav-portfolio">Portfolio.</a>
                 <ul class="nav-menu">
                     <li>
-                        <a class="nav-links" href="/redirectRoutes/index-node">Home</a>
+                        <a class="nav-links" href="/pages/index-node">Home</a>
                     </li>
                     <li>
-                        <a class="nav-links" href="/redirectRoutes/about">About</a>
+                        <a class="nav-links" href="/pages/about">About</a>
                     </li>
                     <li>
                         <a class="nav-links" href="/users/admin-user-management">User</a>
@@ -178,17 +178,17 @@
                                     <div class="bookInStock">
                                         <p>In stock</p>
                                     </div>
+                                    <div class="buttonsDisplayBook">
+                                        <select class="bookQuantity" name="bookQuantity" id="<%=book.name%>"
+                                            onclick="populateBookQuantity('<%=book.countInStock%>', '<%=book.name%>')">
+                                            <option value="1"> Qunatity: 1</option>
+                                        </select>
+                                    </div>
                                     <%}else{%>
                                         <div class="bookOutStock">
                                             <p>Out stock</p>
                                         </div>
                                         <%}%>
-                                            <div class="buttonsDisplayBook">
-                                                <select class="bookQuantity" name="bookQuantity" id="<%=book.name%>"
-                                                    onclick="populateBookQuantity('<%=book.countInStock%>', '<%=book.name%>')">
-                                                    <option value="1"> Qunatity: 1</option>
-                                                </select>
-                                            </div>
                             </div>
                         </div>
                     </div>

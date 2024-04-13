@@ -1,6 +1,7 @@
 const Book = require('../models/book')
 const Category = require('../models/category')
 const mongoose = require('mongoose')
+const fs = require('fs')
 
 /*
 
@@ -43,9 +44,14 @@ exports.createNewBook = async (req, res, next) => {
     if (!fileName) return res.status(400).send('No image in the reques')
 
     //Add Full path  for the image
-    const basePath = `${req.protocol}://${req.get('host')}/uploads/`
+    //const basePath = `${req.protocol}://${req.get('host')}/uploads/`
+    const basePath = '/uploads/'
     //Store the data to pass the data to the module
-    console.log('This is the Category ID: ' + req.body.category)
+    isFeatured = false
+    if (req.body.isFeatured === 'true') {
+        isFeatured = true
+    }
+
     let book = new Book({
         //Automatically creates a new unique ID
         _id: new mongoose.Types.ObjectId(),
@@ -56,7 +62,7 @@ exports.createNewBook = async (req, res, next) => {
         isbn: req.body.isbn,
         price: req.body.price,
         countInStock: req.body.countInStock,
-        isFeatured: req.body.isFeatured,
+        isFeatured: isFeatured,
         image: `${basePath}${fileName}`,
         //images: req.body.images,
     })
@@ -128,32 +134,30 @@ exports.getBookByIdOrName = async (req, res, next) => {
 }
 /*
 
-    ###  SESSION TO GET Book BY ID O
+    ###  SESSION TO GET Book BY ID 
 
 */
 exports.getBookById = async (req, res, next) => {
     const id = req.params.bookId
     //Function to check if the params is a valid ID, if yes, the search will be by ID an return only one book
     if (mongoose.isValidObjectId(id)) {
-        const book = await Book.findById(id)
+        //Function to get all categories from the Schema
+        const categoriesList = await Category.find().select('id name') //Define which fild you want to pass
+        const book = await Book.findById(id).populate('category')
         res.render('adminEJS/admin-book/admin-book-edit', {
             book: book,
+            categoriesListDisplay: categoriesList,
+            messageCategory: false,
+            message: false,
         })
     } else {
-        //Function to serach the Book by one part or full name with REGEX, it will return all titles that match the params.
-        const booksList = await Book.find({
-            name: new RegExp(idOrName, 'i'),
-        }) //For substring search, case insensitive
-
-        //If found, it will send the doc to the EJS
-        if (booksList) {
-            res.render('adminEJS/admin-book/admin-book-management', {
-                booksListDisplay: booksList,
-                book: false,
-            })
-        } else {
-            res.status(500).json({ success: false })
-        }
+        req.flash('message', 'Categories not found')
+        res.render('adminEJS/admin-book/admin-book-new', {
+            book: false,
+            categoriesListDisplay: false,
+            messageCategory: message,
+            message: false,
+        })
     }
 }
 /*
@@ -220,6 +224,11 @@ exports.updateBook = async (req, res, next) => {
             message: 'This Book ID is not valid',
         })
     }
+    //Featured validation
+    isFeatured = false
+    if (req.body.isFeatured === 'true') {
+        isFeatured = true
+    }
     //Function to update the Book with attributes from the body.
     const book = await Book.updateOne(
         { _id: id },
@@ -231,7 +240,7 @@ exports.updateBook = async (req, res, next) => {
             isbn: req.body.isbn,
             price: req.body.price,
             countInStock: req.body.countInStock,
-            isFeatured: req.body.isFeatured,
+            isFeatured: isFeatured,
             image: `${basePath}${fileName}`,
         },
         {
@@ -249,7 +258,7 @@ exports.updateBook = async (req, res, next) => {
     ###  SESSION TO DELETE BOOK BY ID
 
 */
-exports.deleteBook = (req, res, next) => {
+exports.deleteBook = async (req, res, next) => {
     let id = req.params.bookId
     //Function to check if the ID is a Valid ID
     if (!mongoose.isValidObjectId(id)) {
@@ -259,21 +268,17 @@ exports.deleteBook = (req, res, next) => {
         })
     }
     //Delete by ID
-    Book.deleteOne({ _id: id })
-        .exec()
-        .then((book) => {
-            res.status(200).json({
-                message: 'Book deleted',
-                request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/books/',
-                    body: { name: 'String', price: 'Number' },
-                },
-            })
+    const book = await Book.findByIdAndDelete({ _id: id })
+    if (book) {
+        console.log('This is the book path: ' + book.image)
+        fs.unlinkSync('public' + book.image, function (err) {
+            if (err) throw err
+
+            console.log('File deleted!')
         })
-        .catch((err) => {
-            return res.status(400).json({ success: false, error: err })
-        })
+    } else {
+        return res.status(400).json({ success: false, error: err })
+    }
 }
 /*
 

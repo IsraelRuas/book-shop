@@ -18,3 +18,12 @@ function populateBookQuantity(quantityInStock, bookName) {
         }
     }
 }
+
+//Validation to delete the Book with parameters from the Book Edit EJS page
+function removeConfirmation(name, id) {
+    if (confirm('Are you sure, you want to delete this book ' + name)) {
+        window.location.href = '/books/delete/' + id
+    } else {
+        alert('Operation canceled')
+    }
+}

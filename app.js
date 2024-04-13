@@ -17,7 +17,7 @@ const categoriesRoutes = require('./api/routes/categories.js')
 const userRoutes = require('./api/routes/users')
 
 //Constant to import User Routers
-const redirectRoutes = require('./api/routes/redirectRoutes')
+const redirectRoutes = require('./api/routes/pages')
 
 //Constant to import the session and flas to be able to send and display flash messages to the web .ejs
 const session = require('express-session')
@@ -107,8 +107,7 @@ app.use('/books', bookRoutes)
 app.use('/orders', orderRoutes)
 app.use('/users', userRoutes)
 app.use('/categories', categoriesRoutes)
-
-app.use('/redirectRoutes', redirectRoutes)
+app.use('/pages', redirectRoutes)
 
 //Handle requests error
 app.use((req, res, next) => {
