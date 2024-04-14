@@ -5,14 +5,14 @@ const fs = require('fs')
 
 /*
 
- ### SESSION TO LOAD CATEGORY SELECT
+ ### SESSION TO LOAD CATEGORY LIST INTO SELECT IN NEW BOOK PAGE
 
 */
 
 exports.loadCategoryNewBook = async (req, res, next) => {
     //Function to get all categories from the Schema
-    const categoriesList = await Category.find().select('id name') //Define which fild you want to pass
-
+    //Select only ID and name from Category
+    const categoriesList = await Category.find().select('id name')
     if (categoriesList.length > 0) {
         res.render('adminEJS/admin-book/admin-book-new', {
             categoriesListDisplay: categoriesList,
@@ -20,7 +20,11 @@ exports.loadCategoryNewBook = async (req, res, next) => {
             message: false,
         })
     } else {
-        req.flash('message', 'Categories not found')
+        //If the Category list is empty, the error message will be sent to the New Book page
+        req.flash(
+            'message',
+            'Categories not found, please add category before add a book'
+        )
         res.render('adminEJS/admin-book/admin-book-new', {
             categoriesListDisplay: false,
             messageCategory: message,
@@ -29,50 +33,122 @@ exports.loadCategoryNewBook = async (req, res, next) => {
     }
 }
 /*
-
-    ###  SESSION TO CREATE A NEW book
+    ###  SESSION TO VALIDADE THE FIELDS AND CREATE A NEW BOOK
 
 */
 exports.createNewBook = async (req, res, next) => {
-    // Function to check if Category exist before create a new book
-    // const category = await Category.findById('65f790e17dac8bb0f4594b4f') //req.body.category""
-    // if (!category) return res.status(400).send('Invalid Category')
-
-    //fileName gets the image name from the body. If no image, ERROR message
-    const fileName = req.file.filename
-    console.log(fileName)
-    if (!fileName) return res.status(400).send('No image in the reques')
-
-    //Add Full path  for the image
-    //const basePath = `${req.protocol}://${req.get('host')}/uploads/`
-    const basePath = '/uploads/'
-    //Store the data to pass the data to the module
-    isFeatured = false
-    if (req.body.isFeatured === 'true') {
-        isFeatured = true
+    const categoryList = await Category.find()
+    let emptyFieldValidation = false
+    //Getting all values from the body
+    const bookInfoObject = {
+        Name: req.body.name,
+        Description: req.body.description,
+        Author: req.body.author,
+        Category: req.body.category,
+        ISBN: req.body.isbn,
+        Price: req.body.price,
+        Stock: req.body.countInStock,
+        Featured: req.body.isFeatured,
     }
-
-    let book = new Book({
-        //Automatically creates a new unique ID
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        description: req.body.description,
-        author: req.body.author,
-        category: req.body.category,
-        isbn: req.body.isbn,
-        price: req.body.price,
-        countInStock: req.body.countInStock,
-        isFeatured: isFeatured,
-        image: `${basePath}${fileName}`,
-        //images: req.body.images,
+    //Looping to check which field is empty and send a message untill all fields are completed
+    Object.keys(bookInfoObject).forEach((key) => {
+        let value = bookInfoObject[key]
+        if (value === '') {
+            emptyFieldValidation = true
+            return (
+                req.flash('error', " '" + key + "' is required"),
+                res.render('adminEJS/admin-book/admin-book-new', {
+                    categoriesListDisplay: categoryList,
+                    messages: req.flash(),
+                })
+            )
+        }
     })
-    book = await book.save()
-
-    //Condition for error
-    if (!book) {
-        return res.status(500).send('The Book cannot be created')
-    } else {
-        res.send(book)
+    if (!emptyFieldValidation) {
+        const categoryId = bookInfoObject.Category
+        //Condition to check if the book already exist, search with ISBN
+        const bookIsbnFind = await Book.findOne({
+            isbn: bookInfoObject.ISBN,
+        })
+        if (bookIsbnFind) {
+            //If book name was found, the system send a message and the book alredy exist
+            //populate the select back.
+            req.flash(
+                'error',
+                'Book ' +
+                    bookInfoObject.Name +
+                    ' already exist. If you wish to edit a book, ' +
+                    'please go to search and click info to edit.'
+            )
+            res.render('adminEJS/admin-book/admin-book-new', {
+                categoriesListDisplay: categoryList,
+                messages: req.flash(),
+            })
+            // Function to check if Category ID is a valid ID Object
+        } else if (!mongoose.isValidObjectId(categoryId)) {
+            //If the ID is not valid, the system send a message and the category list to
+            //populate the select back.
+            req.flash('error', 'Please select the category.')
+            res.render('adminEJS/admin-book/admin-book-new', {
+                categoriesListDisplay: categoryList,
+                messages: req.flash(),
+            })
+        } else {
+            const category = await Category.findById(bookInfoObject.Category)
+            //Condition to check if the Category ID is valid
+            if (!category) {
+                //If not valid, send a message plus the category list back to the page
+                req.flash('error', 'Invalid category.')
+                res.render('adminEJS/admin-book/admin-book-new', {
+                    categoriesListDisplay: categoryList,
+                })
+            } else if (!req.file) {
+                req.flash('error', 'Please upload the book image')
+                res.render('adminEJS/admin-book/admin-book-new', {
+                    categoriesListDisplay: categoryList,
+                })
+            } else {
+                //Add Full path  for the image
+                //const basePath = `${req.protocol}://${req.get('host')}/uploads/`
+                const basePath = '/uploads/'
+                const fileName = req.file.filename
+                //Condtion to check the Features Radio Button
+                isFeatured = false
+                if (bookInfoObject.Featured === 'true') {
+                    isFeatured = true
+                }
+                //New Book receives the data from the New Book Page
+                let book = new Book({
+                    //Automatically creates a new unique ID
+                    _id: new mongoose.Types.ObjectId(),
+                    name: bookInfoObject.Name,
+                    description: bookInfoObject.Description,
+                    author: bookInfoObject.Author,
+                    category: bookInfoObject.Category,
+                    isbn: bookInfoObject.ISBN,
+                    price: bookInfoObject.Price,
+                    countInStock: bookInfoObject.Stock,
+                    isFeatured: isFeatured,
+                    image: `${basePath}${fileName}`,
+                    //images: req.body.images,
+                })
+                book = await book.save()
+                //Condition for error or success
+                if (!book) {
+                    req.flash('error', 'Error to create Book, try again')
+                    res.render('adminEJS/admin-book/admin-book-new', {
+                        categoriesListDisplay: categoryList,
+                        messages: req.flash(),
+                    })
+                } else {
+                    req.flash('success', 'Book created successfully')
+                    res.render('adminEJS/admin-book/admin-book-new', {
+                        categoriesListDisplay: categoryList,
+                        messages: req.flash(),
+                    })
+                }
+            }
+        }
     }
 }
 /*
@@ -277,7 +353,7 @@ exports.deleteBook = async (req, res, next) => {
             console.log('File deleted!')
         })
     } else {
-        return res.status(400).json({ success: false, error: err })
+        return res.status(400).json({ success: false })
     }
 }
 /*

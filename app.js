@@ -21,7 +21,8 @@ const redirectRoutes = require('./api/routes/pages')
 
 //Constant to import the session and flas to be able to send and display flash messages to the web .ejs
 const session = require('express-session')
-const flash = require('connect-flash')
+//const flash = require('connect-flash')
+const flash = require('express-flash')
 
 //Exproting and creating conection with Mongoose
 const { MongoClient, ServerApiVersion } = require('mongodb')
@@ -88,8 +89,8 @@ app.use(
     session({
         secret: 'secret',
         cokie: { maxAge: 60000 },
-        resave: false,
-        saveUninitialized: false,
+        resave: true,
+        saveUninitialized: true,
     })
 )
 app.use(flash())
