@@ -87,12 +87,12 @@ router.get('/get/category', booksController.getBookByCategory)
 /*
     GET by ID or Name in Book SCHEMA
 */
-router.get('/:bookIdOrName', booksController.getBookByIdOrName)
+router.get('/get/:bookIdOrName', booksController.getBookByIdOrName)
 
 /*
     GET by ID to populate the View/Edit Book Page
 */
-router.get('/get/:bookId', booksController.getBookById)
+router.get('/:bookId', booksController.getBookById)
 /*
     POST to update book by ID 
 */

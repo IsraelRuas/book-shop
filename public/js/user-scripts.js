@@ -17,7 +17,7 @@ function appendUserIdToActionPath() {
     }
     //Variables gets the ID or Name passed from body and add to the path.
     //New form.action gets the new path
-    userRouterPath = `/users/${idOrName}`
+    userRouterPath = `/users/get/${idOrName}`
     document.getElementById('formGetOneUser').action = userRouterPath
 }
 

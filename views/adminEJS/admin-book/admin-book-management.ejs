@@ -7,8 +7,11 @@
     <title>ISRAEL</title>
     <link href="/css/styles.css" rel="stylesheet" type="text/css" />
     <link href="/css/book-styles.css" rel="stylesheet" type="text/css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+        rel="stylesheet" />
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        rel="stylesheet" />
 </head>
 
 <body>
@@ -24,19 +27,24 @@
                         <a class="nav-links" href="/pages/about">About</a>
                     </li>
                     <li>
-                        <a class="nav-links" href="/users/admin-user-management">User</a>
+                        <a class="nav-links"
+                            href="/users/admin-user-management">User</a>
                     </li>
                     <li>
-                        <a class="nav-links" href="/books/book-management">Books</a>
+                        <a class="nav-links"
+                            href="/books/book-management">Books</a>
                     </li>
                     <li>
-                        <a class="nav-links" href="/users/admin-user-management">Order</a>
+                        <a class="nav-links"
+                            href="/users/admin-user-management">Order</a>
                     </li>
                     <li>
-                        <a class="nav-links" href="/categories/get/category-display">Category</a>
+                        <a class="nav-links"
+                            href="/categories/get/category-display">Category</a>
                     </li>
                     <li>
-                        <a class="nav-links" href="/users/admin-user-management">Sales</a>
+                        <a class="nav-links"
+                            href="/users/admin-user-management">Sales</a>
                     </li>
                     <li>
                         <a class="nav-links" href="/users/login">Sign in</a>
@@ -64,15 +72,18 @@
                                     <i class="bx bxs-face-mask"></i></a>
                             </li>
                             <li>
-                                <a href="#">FANTASY <i class="bx bxs-castle"></i></a>
+                                <a href="#">FANTASY <i
+                                        class="bx bxs-castle"></i></a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a class="nav-links2" href="#">BOOKS <i class="bx bxs-book"></i></a>
+                        <a class="nav-links2" href="#">BOOKS <i
+                                class="bx bxs-book"></i></a>
                     </li>
                     <li>
-                        <a class="nav-links2" href="#">ORDER <i class="bx bxs-cart"></i></a>
+                        <a class="nav-links2" href="#">ORDER <i
+                                class="bx bxs-cart"></i></a>
                     </li>
                 </ul>
             </nav>
@@ -81,16 +92,49 @@
     <div class="bookAdminContainer">
         <div class="searchCreateFeatures">
             <h1>Book Management</h1>
+            <% if (messages.error) { %>
+            <div class="alert-message-error">
+                <ul>
+                    <% messages.error.forEach(function(error) { %>
+                    <li>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <%= error %>
+                    </li>
+                    <% }); %>
+                </ul>
+            </div>
+
+            
+            <% } %>
+            <% if (messages.success) { %>
+            <div class="alert-message-success">
+                <i class="fa-regular fa-circle-check"></i>
+                <%= messages.success %>
+            </div>
+
+            
+            <% } %>
+            <% if (messages.warning) { %>
+            <div class="alert-message-warning">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <%= messages.warning %>
+            </div>
+
+            
+            <% } %>
             <div class="divAddNewBook">
-                <a href='/books/create-new-book'> Create a new book <i class="bx bxs-book-add"></i></a>
+                <a href='/books/create-new-book'> Create a new book <i
+                        class="bx bxs-book-add"></i></a>
             </div>
             <div class="divSearchBook">
                 <form class="formGetOneBook" id="formGetOneBook" method="get">
                     <div>
                         <label for="bookID">Search Book by ID or Title</label>
                     </div>
-                    <input class="bookInput" type="text" id="bookID" name="bookID" placeholder="Book ID or title.." />
-                    <button onclick="appendBookIdToActionPath()" class="buttonBookSearch">
+                    <input class="bookInput" type="text" id="bookIdOrName"
+                        name="bookIdOrName" placeholder="Book ID or title.." />
+                    <button onclick="appendBookIdToActionPath()"
+                        class="buttonBookSearch">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
@@ -100,104 +144,111 @@
                             Display Book list
                         </button>
                     </form>
-                    <% if (typeof(message) !="undefined" ) {%>
-                        <% if (message.length> 0){ %>
-                            <div class="message-book-managemnet">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                <%= message %>
-                            </div>
-                            <%}%>
-                                <%}%>
                 </div>
             </div>
-            <% if (book !=false) {%>
-                <div class="hiddenBookResultDetails">
-                    <form>
-                        <div>
-                            <label for="bookID">Title</label>
-                        </div>
-                        <input class="bookInputDisplay" type="text" id="bookID" name="bookID" value="<%=book.name%>"
-                            readonly />
-                        <!--<button class="buttonGetBooks">
-                        <i class="fa-solid fa-info"></i> Details
-                    </button>-->
-                        <div>
-                            <label for="bookID">Description</label>
-                        </div>
-                        <div class="divBookTextArea">
-                            <textarea class="bookTextArea" id="bookInputDisplay" name="bookDesc" rows="4" cols="43"
-                                readonly><%=book.description%></textarea>
-                        </div>
-                        <div>
-                            <label for="bookID">Price $</label>
-                        </div>
-                        <input class="bookInputDisplay" type="text" id="bookPrice" name="bookPrice"
-                            value="<%=book.price%>" readonly />
-                    </form>
-                </div>
-                <%}%>
-        </div>
-
-        <% if (booksListDisplay !=false) {%>
-            <% if ( typeof(booksListDisplay) !="undefined" ) {%>
-                <%booksListDisplay.forEach(book=> { %>
-                    <div class="container-book-display">
-                        <div class="bookDisplayParent">
-                            <div class="bookDisplayChildLeft">
-                                <img src="<%= book.image%>" alt="<%= book.name%>" class="displayBookImage">
-                            </div>
-                            <div class="bookDisplayChildMidle">
-                                <div class="bookName">
-                                    <%= book.name%>
-                                </div>
-                                <div class="lineBookDisplay"></div>
-                                <div class="bookDescription">
-                                    <%= book.description %>
-                                </div>
-                                <div class="lineBookDisplay"></div>
-                                <div class="bookCategory">
-                                    Category: <%= book.category.name %>
-                                        <i class="fa-solid fa-flag" style="color: <%= book.category.color %>"></i>
-                                </div>
-                                <div class="lineBookDisplay"></div>
-                                <div class="bookAuthor">
-                                    Author: <spam>
-                                        <%= book.author %>
-                                    </spam>
-                                </div>
-                            </div>
-                            <div class="bookDisplayChildRight">
-                                <div class="bookPrice">
-                                    $<%= book.price%>
-                                </div>
-                                <div class="bookInfo">
-                                    <a class="fa-awsome" href="/books/get/<%= book.id %>">
-                                        <i class="fa-solid fa-circle-info"></i></a>
-                                </div>
-                                <% if (book.countInStock> 0){%>
-                                    <div class="bookInStock">
-                                        <p>In stock</p>
-                                    </div>
-                                    <div class="buttonsDisplayBook">
-                                        <select class="bookQuantity" name="bookQuantity" id="<%=book.name%>"
-                                            onclick="populateBookQuantity('<%=book.countInStock%>', '<%=book.name%>')">
-                                            <option value="1"> Qunatity: 1</option>
-                                        </select>
-                                    </div>
-                                    <%}else{%>
-                                        <div class="bookOutStock">
-                                            <p>Out stock</p>
-                                        </div>
-                                        <%}%>
-                            </div>
-                        </div>
+            <% if (book != false && typeof(book) !== "undefined") { %>
+            <div class="hiddenBookResultDetails">
+                <form>
+                    <div>
+                        <label for="bookID">Title</label>
                     </div>
-                    <%})%>
+                    <input class="bookInputDisplay" type="text" id="bookID"
+                        name="bookID" value="<%= book.name %>"
+                        readonly />
+                    <div>
+                        <label for="bookID">Description</label>
+                    </div>
+                    <div class="divBookTextArea">
+                        <textarea class="bookTextArea" id="bookInputDisplay"
+                            name="bookDesc" rows="4" cols="43" readonly>
+                            <%= book.description %>
+                        </textarea>
+                    </div>
+                    <div>
+                        <label for="bookID">Price $</label>
+                    </div>
+                    <input class="bookInputDisplay" type="text" id="bookPrice"
+                        name="bookPrice"
+                        value="<%= book.price %>" readonly />
+                </form>
+            </div>
 
-                        <%}%>
 
-                            <%}%>
 
+
+
+            
+            <% } %>
+        </div>
+        <% if (booksListDisplay != false && typeof(booksListDisplay) != "undefined") { %>
+        <% booksListDisplay.forEach(book => { %>
+        <div class="container-book-display">
+            <div class="bookDisplayParent">
+                <div class="bookDisplayChildLeft">
+                    <img src="<%= book.image %>"
+                        alt="<%= book.name %>"
+                        class="displayBookImage">
+                </div>
+                <div class="bookDisplayChildMidle">
+                    <div class="bookName">
+                        <%= book.name %>
+                    </div>
+                    <div class="lineBookDisplay"></div>
+                    <div class="bookDescription">
+                        <%= book.description %>
+                    </div>
+                    <div class="lineBookDisplay"></div>
+                    <div class="bookCategory">
+                        Category:
+                        <%= book.category.name %>&nbsp<i
+                            class="fa-solid fa-flag"
+                            style="color:<%= book.category.color %>"></i>
+                    </div>
+                    <div class="lineBookDisplay"></div>
+                    <div class="bookAuthor">
+                        Author: <spam>
+                            <%= book.author %>
+                        </spam>
+                    </div>
+                </div>
+                <div class="bookDisplayChildRight">
+                    <div class="bookPrice">
+                        $
+                        <%= book.price %>
+                    </div>
+                    <div class="bookInfo">
+                        <a class="fa-awsome"
+                            href="/books/<%= book.id %>">
+                            <i class="fa-solid fa-circle-info"></i></a>
+                    </div>
+                    <% if (book.countInStock > 0) { %>
+                    <div class="bookInStock">
+                        <p>In stock</p>
+                    </div>
+                    <div class="buttonsDisplayBook">
+                        <select class="bookQuantity" name="bookQuantity"
+                            id="<%= book.name %>"
+                            onclick="populateBookQuantity('<%= book.countInStock %>', '<%= book.name %>')">
+                            <option value="1"> Qunatity: 1</option>
+                        </select>
+                    </div>
+                    <% } else { %>
+                    <div class="bookOutStock">
+                        <p>Out stock</p>
+                    </div>
+
+
+
+
+
+                    
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        
+        <% } %>
     </div>
     <script type="text/javascript" src="/js/book-scripts.js"></script>
 </body>

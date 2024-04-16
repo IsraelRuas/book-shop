@@ -14,6 +14,7 @@
 
 .bookAdminContainer .searchCreateFeatures {
     margin-left: 40%;
+    width: 55%;
 
 }
 
@@ -405,9 +406,8 @@
     text-align: center;
     background-color: #f1dede;
     color: #d80909;
-    padding: 8px 8px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 6px 6px;
+    margin-top: 5px;
     margin-bottom: 10px;
 }
 
@@ -415,9 +415,25 @@
     text-align: center;
     background-color: #10a11c;
     color: #ffffff;
-    padding: 8px 8px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 6px 6px;
+    margin-top: 5px;
+}
+
+.alert-message-success-new {
+    text-align: center;
+    background-color: #10a11c;
+    color: #ffffff;
+    padding: 6px 6px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.alert-message-warning {
+    text-align: center;
+    background-color: yellow;
+    color: #000000;
+    padding: 6px 6px;
+    margin-top: 5px;
     margin-bottom: 10px;
 }
 

@@ -55,13 +55,13 @@ router.get('/', userController.getUsersList)
 /*
     GET by ID to populate the View/Edit User Page
 */
-router.get('/get/:userId', userController.getUserById)
+router.get('/:userId', userController.getUserById)
 /*
 
 /*
     GET by ID or Name in User SCHEMA
 */
-router.get('/:userIdOrName', userController.getUserByIdOrName)
+router.get('/get/:userIdOrName', userController.getUserByIdOrName)
 
 /*
     UPDATE

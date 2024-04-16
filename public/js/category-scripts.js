@@ -1,4 +1,4 @@
-//Validation to delete the user with parameters from the user-list.ejs page
+//Validation to delete the category with parameters from the admin-category-management EJS page
 function removeConfirmation(name, id) {
     if (confirm('Are you sure, you want to delete this category ' + name)) {
         window.location.href = '/categories/delete/' + id
@@ -7,9 +7,9 @@ function removeConfirmation(name, id) {
     }
 }
 
-//Adding the userID or name to the Path in the form
+//Adding the categoryID or name to the Path in the form
 function appendCategoryIdToActionPath() {
-    //router.get('/:userIdOrName', userController.getUserByIdOrName)
+    //router.get('/get/:categoryIdOrName', categoriesController.getCategoryByIdOrName)
     idOrName = document.getElementById('categoryIdOrName').value
     alert('Category ID/Name: ' + idOrName)
     if (idOrName == 0) {

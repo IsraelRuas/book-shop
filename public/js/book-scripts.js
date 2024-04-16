@@ -19,6 +19,20 @@ function populateBookQuantity(quantityInStock, bookName) {
     }
 }
 
+//Adding the bookID or name to the Path in the form
+function appendBookIdToActionPath() {
+    //router.get('/:bookIdOrName', booksController.getBookByIdOrName)
+    idOrName = document.getElementById('bookIdOrName').value
+    alert('Book ID/Name: ' + idOrName)
+    if (idOrName == 0) {
+        idOrName = 1
+    }
+    //Variables gets the ID or Name passed from body and add to the path.
+    //New form.action gets the new path
+    bookRouterPath = `/books/get/${idOrName}`
+    document.getElementById('formGetOneBook').action = bookRouterPath
+}
+
 //Validation to delete the Book with parameters from the Book Edit EJS page
 function removeConfirmation(name, id) {
     if (confirm('Are you sure, you want to delete this book ' + name)) {

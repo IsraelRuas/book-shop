@@ -3,18 +3,36 @@ const Category = require('../models/category')
 const mongoose = require('mongoose')
 const fs = require('fs')
 
+const noDataFound = 'Sorry, there are no records in the book table'
+const bookManagementPath = 'adminEJS/admin-book/admin-book-management'
+const bookNewPath = 'adminEJS/admin-book/admin-book-new'
+const bookEditPath = 'adminEJS/admin-book/admin-book-edit'
+
+/*
+
+CHECKING IF BOOK TABLE OR CATEGORY TABLE ARE EMPTY, 
+IF NOT, THE RETURN WILL BE THE DATA AND LENGTH GREATER THAN '0'
+
+*/
+async function bookTableList() {
+    const bookList = await Book.find()
+    return bookList
+}
+async function categoryTableList() {
+    const categoriesList = await Category.find()
+    return categoriesList
+}
 /*
 
  ### SESSION TO LOAD CATEGORY LIST INTO SELECT IN NEW BOOK PAGE
 
 */
-
 exports.loadCategoryNewBook = async (req, res, next) => {
     //Function to get all categories from the Schema
     //Select only ID and name from Category
     const categoriesList = await Category.find().select('id name')
     if (categoriesList.length > 0) {
-        res.render('adminEJS/admin-book/admin-book-new', {
+        res.render(bookNewPath, {
             categoriesListDisplay: categoriesList,
             messageCategory: false,
             message: false,
@@ -25,7 +43,7 @@ exports.loadCategoryNewBook = async (req, res, next) => {
             'message',
             'Categories not found, please add category before add a book'
         )
-        res.render('adminEJS/admin-book/admin-book-new', {
+        res.render(bookNewPath, {
             categoriesListDisplay: false,
             messageCategory: message,
             message: false,
@@ -40,7 +58,7 @@ exports.createNewBook = async (req, res, next) => {
     const categoryList = await Category.find()
     let emptyFieldValidation = false
     //Getting all values from the body
-    const bookInfoObject = {
+    const bookObject = {
         Name: req.body.name,
         Description: req.body.description,
         Author: req.body.author,
@@ -51,13 +69,13 @@ exports.createNewBook = async (req, res, next) => {
         Featured: req.body.isFeatured,
     }
     //Looping to check which field is empty and send a message untill all fields are completed
-    Object.keys(bookInfoObject).forEach((key) => {
-        let value = bookInfoObject[key]
+    Object.keys(bookObject).forEach((key) => {
+        let value = bookObject[key]
         if (value === '') {
             emptyFieldValidation = true
             return (
                 req.flash('error', " '" + key + "' is required"),
-                res.render('adminEJS/admin-book/admin-book-new', {
+                res.render(bookNewPath, {
                     categoriesListDisplay: categoryList,
                     messages: req.flash(),
                 })
@@ -65,47 +83,40 @@ exports.createNewBook = async (req, res, next) => {
         }
     })
     if (!emptyFieldValidation) {
-        const categoryId = bookInfoObject.Category
+        const categoryId = bookObject.Category
         //Condition to check if the book already exist, search with ISBN
         const bookIsbnFind = await Book.findOne({
-            isbn: bookInfoObject.ISBN,
+            isbn: bookObject.ISBN,
         })
         if (bookIsbnFind) {
             //If book name was found, the system send a message and the book alredy exist
             //populate the select back.
             req.flash(
-                'error',
+                'warning',
                 'Book ' +
-                    bookInfoObject.Name +
+                    bookObject.Name +
                     ' already exist. If you wish to edit a book, ' +
                     'please go to search and click info to edit.'
             )
-            res.render('adminEJS/admin-book/admin-book-new', {
-                categoriesListDisplay: categoryList,
-                messages: req.flash(),
-            })
-            // Function to check if Category ID is a valid ID Object
-        } else if (!mongoose.isValidObjectId(categoryId)) {
-            //If the ID is not valid, the system send a message and the category list to
-            //populate the select back.
-            req.flash('error', 'Please select the category.')
-            res.render('adminEJS/admin-book/admin-book-new', {
+            res.render(bookNewPath, {
                 categoriesListDisplay: categoryList,
                 messages: req.flash(),
             })
         } else {
-            const category = await Category.findById(bookInfoObject.Category)
+            const category = await Category.findById(bookObject.Category)
             //Condition to check if the Category ID is valid
             if (!category) {
                 //If not valid, send a message plus the category list back to the page
                 req.flash('error', 'Invalid category.')
-                res.render('adminEJS/admin-book/admin-book-new', {
+                res.render(bookNewPath, {
                     categoriesListDisplay: categoryList,
+                    messages: req.flash(),
                 })
             } else if (!req.file) {
                 req.flash('error', 'Please upload the book image')
-                res.render('adminEJS/admin-book/admin-book-new', {
+                res.render(bookNewPath, {
                     categoriesListDisplay: categoryList,
+                    messages: req.flash(),
                 })
             } else {
                 //Add Full path  for the image
@@ -113,22 +124,24 @@ exports.createNewBook = async (req, res, next) => {
                 const basePath = '/uploads/'
                 const fileName = req.file.filename
                 //Condtion to check the Features Radio Button
-                isFeatured = false
-                if (bookInfoObject.Featured === 'true') {
-                    isFeatured = true
+                //Featured validation
+                if (bookObject.Featured === 'true') {
+                    bookObject.Featured = true
+                } else {
+                    bookObject.Featured = false
                 }
-                //New Book receives the data from the New Book Page
+                //New Book receives the data from bookObject
                 let book = new Book({
                     //Automatically creates a new unique ID
                     _id: new mongoose.Types.ObjectId(),
-                    name: bookInfoObject.Name,
-                    description: bookInfoObject.Description,
-                    author: bookInfoObject.Author,
-                    category: bookInfoObject.Category,
-                    isbn: bookInfoObject.ISBN,
-                    price: bookInfoObject.Price,
-                    countInStock: bookInfoObject.Stock,
-                    isFeatured: isFeatured,
+                    name: bookObject.Name,
+                    description: bookObject.Description,
+                    author: bookObject.Author,
+                    category: bookObject.Category,
+                    isbn: bookObject.ISBN,
+                    price: bookObject.Price,
+                    countInStock: bookObject.Stock,
+                    isFeatured: bookObject.Featured,
                     image: `${basePath}${fileName}`,
                     //images: req.body.images,
                 })
@@ -136,13 +149,13 @@ exports.createNewBook = async (req, res, next) => {
                 //Condition for error or success
                 if (!book) {
                     req.flash('error', 'Error to create Book, try again')
-                    res.render('adminEJS/admin-book/admin-book-new', {
+                    res.render(bookNewPath, {
                         categoriesListDisplay: categoryList,
                         messages: req.flash(),
                     })
                 } else {
                     req.flash('success', 'Book created successfully')
-                    res.render('adminEJS/admin-book/admin-book-new', {
+                    res.render(bookNewPath, {
                         categoriesListDisplay: categoryList,
                         messages: req.flash(),
                     })
@@ -157,23 +170,23 @@ exports.createNewBook = async (req, res, next) => {
 
 */
 exports.getBooksList = async (req, res, next) => {
-    //SORT ASCENDING ORDER
+    //SORT ASCENDING ORDER // Populating category in book
     const booksList = await Book.find().populate('category').sort({ name: 1 })
     //SORT: asc, desc, ascending, descending, 1, or -1
 
-    console.log(booksList)
     //If found, it will send the doc to the EJS
     if (booksList.length > 0) {
-        res.render('adminEJS/admin-book/admin-book-management', {
+        res.render(bookManagementPath, {
             booksListDisplay: booksList,
             book: false,
+            messages: false,
         })
     } else {
-        req.flash('message', 'Sorry, no records are present on the Database')
-        res.render('adminEJS/admin-book/admin-book-management', {
-            booksListDisplay: false,
+        req.flash('warning', noDataFound)
+        res.render(bookManagementPath, {
             book: false,
-            message: req.flash('message'),
+            booksListDisplay: false,
+            messages: req.flash(),
         })
     }
 }
@@ -183,28 +196,45 @@ exports.getBooksList = async (req, res, next) => {
 
 */
 exports.getBookByIdOrName = async (req, res, next) => {
-    const idOrName = req.params.bookIdOrName
-    //Function to check if the params is a valid ID, if yes, the search will be by ID an return only one book
-    if (mongoose.isValidObjectId(idOrName)) {
-        const bookId = await Book.findById(idOrName).select('name description') //Define which fild you want to pass
-        res.render('adminEJS/admin-book/admin-book-management', {
-            book: bookId,
+    if (bookTableList().length == null || bookTableList().length < 1) {
+        req.flash('warning', noDataFound)
+        res.render(bookManagementPath, {
+            book: false,
             booksListDisplay: false,
+            messages: req.flash(),
         })
     } else {
-        //Function to serach the Book by one part or full name with REGEX, it will return all titles that match the params.
-        const booksList = await Book.find({
-            name: new RegExp(idOrName, 'i'),
-        }) //For substring search, case insensitive
-
-        //If found, it will send the doc to the EJS
-        if (booksList) {
-            res.render('adminEJS/admin-book/admin-book-management', {
-                booksListDisplay: booksList,
-                book: false,
+        const idOrName = req.params.bookIdOrName
+        //Function to check if the params is a valid ID, if yes, the search will be by ID an return only one book
+        if (mongoose.isValidObjectId(idOrName)) {
+            const bookId =
+                await Book.findById(idOrName).select('name description') //Define which fild you want to pass
+            res.render(bookManagementPath, {
+                book: bookId,
+                booksListDisplay: false,
             })
         } else {
-            res.status(500).json({ success: false })
+            //Function to serach the Book by one part or full name with REGEX, it will return all titles that match the params.
+            const booksList = await Book.find({
+                name: new RegExp(idOrName, 'i'),
+            }) //For substring search, case insensitive
+            console.log('After search ' + booksList.length)
+
+            //If found, it will send the doc to the EJS
+            if (booksList.length > 0) {
+                console.log('Book found')
+                res.render(bookManagementPath, {
+                    booksListDisplay: booksList,
+                    book: false,
+                })
+            } else {
+                req.flash('warning', "No book found with '" + idOrName + "'")
+                res.render(bookManagementPath, {
+                    book: false,
+                    booksListDisplay: false,
+                    messages: req.flash(),
+                })
+            }
         }
     }
 }
@@ -220,19 +250,14 @@ exports.getBookById = async (req, res, next) => {
         //Function to get all categories from the Schema
         const categoriesList = await Category.find().select('id name') //Define which fild you want to pass
         const book = await Book.findById(id).populate('category')
-        res.render('adminEJS/admin-book/admin-book-edit', {
+        res.render(bookEditPath, {
             book: book,
             categoriesListDisplay: categoriesList,
-            messageCategory: false,
-            message: false,
         })
     } else {
-        req.flash('message', 'Categories not found')
-        res.render('adminEJS/admin-book/admin-book-new', {
+        //req.flash('warning', 'Book not found')
+        res.render(bookManagementPath, {
             book: false,
-            categoriesListDisplay: false,
-            messageCategory: message,
-            message: false,
         })
     }
 }
@@ -292,41 +317,96 @@ exports.getBookByCategory = async (req, res, next) => {
 
 */
 exports.updateBook = async (req, res, next) => {
+    let emptyFieldValidation = false
+    const categoryList = await Category.find()
     const id = req.params.bookId
-    //Function to check if the ID is a Valid ID
-    if (!mongoose.isValidObjectId(id)) {
-        return res.status(500).json({
-            success: false,
-            message: 'This Book ID is not valid',
-        })
+    console.log('This is the name value:' + req.body.name)
+    const bookObject = {
+        name: req.body.name,
+        description: req.body.description,
+        author: req.body.author,
+        category: req.body.category,
+        isbn: req.body.isbn,
+        price: req.body.price,
+        countInStock: req.body.countInStock,
+        isFeatured: req.body.isFeatured,
     }
-    //Featured validation
-    isFeatured = false
-    if (req.body.isFeatured === 'true') {
-        isFeatured = true
-    }
-    //Function to update the Book with attributes from the body.
-    const book = await Book.updateOne(
-        { _id: id },
-        {
-            name: req.body.name,
-            description: req.body.description,
-            author: req.body.author,
-            category: req.body.category,
-            isbn: req.body.isbn,
-            price: req.body.price,
-            countInStock: req.body.countInStock,
-            isFeatured: isFeatured,
-            image: `${basePath}${fileName}`,
-        },
-        {
-            new: true,
+    console.log(bookObject)
+    //Looping to check which field is empty and send a message untill all fields are completed
+    Object.keys(bookObject).forEach((key) => {
+        let value = bookObject[key]
+        if (value === '') {
+            console.log('The code passed here 1')
+            emptyFieldValidation = true
+            return (
+                req.flash('error', " '" + key + "' is required"),
+                res.render(bookEditPath, {
+                    categoriesListDisplay: categoryList,
+                    book: bookObject,
+                    messages: req.flash(),
+                })
+            )
         }
-    )
-    if (!book) {
-        return res.status(404).send('The Book cannot be updated')
-    } else {
-        res.send(book)
+    })
+    if (!emptyFieldValidation) {
+        console.log('The code passed here 2')
+        //Function to check if the ID is a Valid ID
+        if (!mongoose.isValidObjectId(id)) {
+            return (
+                req.flash('error', 'Invalid ID'),
+                res.render(bookEditPath, {
+                    categoriesListDisplay: false,
+                    messages: req.flash(),
+                })
+            )
+        } else {
+            //Featured validation
+            if (bookObject.Featured === 'true') {
+                bookObject.Featured = true
+            } else {
+                bookObject.Featured = false
+            }
+            //Function to update the Book with attributes from the body.
+            const book = await Book.updateOne(
+                { _id: id },
+
+                {
+                    name: bookObject.Name,
+                    description: bookObject.Description,
+                    author: bookObject.Author,
+                    category: bookObject.Category,
+                    isbn: bookObject.ISBN,
+                    price: bookObject.Price,
+                    countInStock: bookObject.CountInStock,
+                    isFeatured: bookObject.Featured,
+                },
+                {
+                    new: true,
+                }
+            )
+            if (!book) {
+                return (
+                    req.flash('error', 'The book cannot be updated'),
+                    res.render(bookEditPath, {
+                        categoriesListDisplay: false,
+                        messages: req.flash(),
+                    })
+                )
+            } else {
+                console.log('The code passed here 3')
+                return (
+                    req.flash(
+                        'success',
+                        'Book ' + bookObject.Name + ' updated successfully'
+                    ),
+                    res.render(bookManagementPath, {
+                        booksListDisplay: false,
+                        book: false,
+                        messages: req.flash(),
+                    })
+                )
+            }
+        }
     }
 }
 /*
@@ -338,22 +418,48 @@ exports.deleteBook = async (req, res, next) => {
     let id = req.params.bookId
     //Function to check if the ID is a Valid ID
     if (!mongoose.isValidObjectId(id)) {
-        return res.status(500).json({
-            success: false,
-            message: 'This book ID is not valid',
-        })
-    }
-    //Delete by ID
-    const book = await Book.findByIdAndDelete({ _id: id })
-    if (book) {
-        console.log('This is the book path: ' + book.image)
-        fs.unlinkSync('public' + book.image, function (err) {
-            if (err) throw err
-
-            console.log('File deleted!')
-        })
+        return (
+            req.flash(
+                'error',
+                'Invalid ID, please try again or contact your admin'
+            ),
+            res.render(bookEditPath, {
+                book: false,
+                messages: req.flash(),
+            })
+        )
     } else {
-        return res.status(400).json({ success: false })
+        //Delete by ID
+        const book = await Book.findByIdAndDelete({ _id: id })
+        if (book) {
+            console.log('This is the book path: ' + book.image)
+            fs.unlinkSync('public' + book.image, function (err) {
+                if (err) {
+                    throw err
+                } else {
+                    return (
+                        req.flash('success', 'Book deleted successfully'),
+                        res.render(bookManagementPath, {
+                            booksListDisplay: bookTableList(),
+                            book: false,
+                            messages: req.flash(),
+                        })
+                    )
+                }
+            })
+        } else {
+            return (
+                req.flash(
+                    'error',
+                    'Error! Book cannot be deleted, try again or contact your admin'
+                ),
+                res.render(bookManagementPath, {
+                    booksListDisplay: bookTableList(),
+                    book: false,
+                    messages: req.flash(),
+                })
+            )
+        }
     }
 }
 /*

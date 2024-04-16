@@ -198,6 +198,7 @@ body {
 }
 
 .btn {
+    cursor: pointer;
     display: inline-block;
     padding: 12px 28px;
     background: #0ef;
